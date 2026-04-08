@@ -1,133 +1,314 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Portfolio DevOps</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diego Cruz — Cloud Engineer</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Distinctive font pairing: Syne (display) + IBM Plex Mono (body/code feel) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo">
-                <h2>💻 DevOps Portfolio</h2>
-            </div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#sobre">Sobre</a></li>
-                <li><a href="#projetos">Projetos</a></li>
-                <li><a href="#contato">Contato</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <main>
-        <section id="home" class="hero">
-            <div class="hero-content">
-                <h1>Olá! 👋 Eu sou <span>Diego Cruz</span></h1>
-                <p>Especialista em DevOps e Automação</p>
-                <div class="cta-buttons">
-                    <a href="#projetos" class="btn primary">Ver Projetos</a>
-                    <a href="#contato" class="btn secondary">Entrar em Contato</a>
-                </div>
-            </div>
-        </section>
+  <!-- ===================== NAV ===================== -->
+  <nav class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="#hero" class="nav__logo">dc<span class="accent">.</span></a>
+      <ul class="nav__links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#labs">Labs</a></li>
+        <li><a href="#thoughts">Thoughts</a></li>
+        <li><a href="https://github.com/diegocruz-0" target="_blank" rel="noopener" class="nav__cta">GitHub ↗</a></li>
+      </ul>
+      <button class="nav__burger" id="navBurger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="nav__mobile" id="navMobile">
+      <a href="#about">About</a>
+      <a href="#labs">Labs</a>
+      <a href="#thoughts">Thoughts</a>
+      <a href="https://github.com/diegocruz-0" target="_blank" rel="noopener">GitHub ↗</a>
+    </div>
+  </nav>
 
-        <section id="sobre" class="about">
-            <div class="container">
-                <h2>🚀 Sobre Mim</h2>
-                <div class="about-content">
-                    <div class="about-text">
-                        <p>Sou apaixonado por automação, infraestrutura como código e cultura DevOps. 
-                           Trabalho com ferramentas modernas para criar soluções eficientes e escaláveis.</p>
-                        
-                        <div class="skills">
-                            <h3>🛠️ Tecnologias</h3>
-                            <div class="skill-tags">
-                                <span class="skill">Git & GitHub</span>
-                                <span class="skill">Docker</span>
-                                <span class="skill">Terraform</span>
-                                <span class="skill">GitHub Actions</span>
-                                <span class="skill">Linux</span>
-                                <span class="skill">AWS</span>
-                                <span class="skill">Python</span>
-                                <span class="skill">Bash</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+  <!-- ===================== HERO ===================== -->
+  <section class="hero" id="hero">
+    <!-- Decorative grid lines -->
+    <div class="hero__grid" aria-hidden="true">
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
 
-        <section id="projetos" class="projects">
-            <div class="container">
-                <h2>📂 Projetos em Destaque</h2>
-                <div class="projects-grid">
-                    <div class="project-card">
-                        <h3>🏗️ Infraestrutura AWS com Terraform</h3>
-                        <p>Automação completa de infraestrutura na AWS usando Terraform e GitHub Actions.</p>
-                        <div class="project-tech">
-                            <span>Terraform</span>
-                            <span>AWS</span>
-                            <span>GitHub Actions</span>
-                        </div>
-                        <a href="#" class="project-link">Ver no GitHub <i class="fab fa-github"></i></a>
-                    </div>
+    <div class="hero__content">
+      <p class="hero__eyebrow fade-in" style="--delay: 0s">Cloud Engineer · Sydney, AU</p>
+      <h1 class="hero__name fade-in" style="--delay: 0.1s">Diego<br/>Cruz</h1>
+      <p class="hero__tagline fade-in" style="--delay: 0.2s">
+        Learning, building, and experimenting in public.
+      </p>
+      <p class="hero__intro fade-in" style="--delay: 0.3s">
+        I spend my days at the intersection of cloud infrastructure and curiosity —
+        tinkering with Azure environments, chasing certifications, and writing down
+        what I discover so the next person doesn't have to start from scratch.
+      </p>
+      <div class="hero__actions fade-in" style="--delay: 0.4s">
+        <a href="#labs" class="btn btn--primary">View Labs</a>
+        <a href="#thoughts" class="btn btn--ghost">Read Thoughts</a>
+      </div>
+    </div>
 
-                    <div class="project-card">
-                        <h3>🐳 Pipeline CI/CD com Docker</h3>
-                        <p>Pipeline completo de integração e deploy usando containers Docker.</p>
-                        <div class="project-tech">
-                            <span>Docker</span>
-                            <span>CI/CD</span>
-                            <span>Node.js</span>
-                        </div>
-                        <a href="#" class="project-link">Ver no GitHub <i class="fab fa-github"></i></a>
-                    </div>
+    <!-- Decorative terminal block -->
+    <div class="hero__terminal fade-in" style="--delay: 0.5s" aria-hidden="true">
+      <div class="terminal__bar">
+        <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+        <span class="terminal__title">~/diego</span>
+      </div>
+      <div class="terminal__body">
+        <p><span class="t-prompt">→</span> <span class="t-cmd">whoami</span></p>
+        <p class="t-out">diego_cruz</p>
+        <p><span class="t-prompt">→</span> <span class="t-cmd">cat certs.txt</span></p>
+        <p class="t-out">AZ-104 · MS-100 · MS-101 · AZ-900</p>
+        <p class="t-out t-dim">AZ-700 <span class="t-badge">in progress</span></p>
+        <p><span class="t-prompt">→</span> <span class="t-cmd">echo $CURRENT_FOCUS</span></p>
+        <p class="t-out">GitHub Certs · Azure Networking · Pre-Sales</p>
+        <p class="t-cursor">█</p>
+      </div>
+    </div>
+  </section>
 
-                    <div class="project-card">
-                        <h3>⚙️ Monitoramento com Prometheus</h3>
-                        <p>Stack de observabilidade com Prometheus, Grafana e AlertManager.</p>
-                        <div class="project-tech">
-                            <span>Prometheus</span>
-                            <span>Grafana</span>
-                            <span>Docker Compose</span>
-                        </div>
-                        <a href="#" class="project-link">Ver no GitHub <i class="fab fa-github"></i></a>
-                    </div>
-                </div>
-            </div>
-        </section>
+  <!-- ===================== ABOUT ===================== -->
+  <section class="section about" id="about">
+    <div class="section__inner">
+      <div class="section__label">// 01 about</div>
+      <h2 class="section__heading reveal">Who I am</h2>
 
-        <section id="contato" class="contact">
-            <div class="container">
-                <h2>📫 Vamos Conversar?</h2>
-                <div class="contact-content">
-                    <p>Interessado em colaborar ou discutir sobre DevOps? Entre em contato!</p>
-                    <div class="contact-links">
-                        <a href="mailto:seu-email@exemplo.com" class="contact-link">
-                            <i class="fas fa-envelope"></i> Email
-                        </a>
-                        <a href="https://linkedin.com/in/seu-perfil" class="contact-link">
-                            <i class="fab fa-linkedin"></i> LinkedIn
-                        </a>
-                        <a href="https://github.com/SEU-USUARIO" class="contact-link">
-                            <i class="fab fa-github"></i> GitHub
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Meu Portfolio DevOps. Deploy automático via GitHub Actions 🚀</p>
-            <p>Última atualização: <span id="last-update"><!--TIMESTAMP--></span></p>
+      <div class="about__grid">
+        <div class="about__text reveal">
+          <p>
+            I'm a Cloud Engineer based in Sydney with over 8 years in IT infrastructure.
+            My comfort zone is Microsoft Azure and M365, but I'm always reaching past the edges of what I already know —
+            whether that's diving into networking architecture, exploring pre-sales engineering, or chasing a new certification.
+          </p>
+          <p>
+            This space is my public notebook. I use it to document experiments, share half-formed ideas,
+            and keep myself accountable to the learning I say I'm doing.
+          </p>
+          <p>
+            When I'm not in the cloud, I'm probably running a home lab, watching football, or overcooking something on the BBQ.
+          </p>
         </div>
-    </footer>
 
-    <script src="assets/script.js"></script>
+        <div class="about__tags reveal">
+          <!-- Core interest tags -->
+          <div class="tag-group">
+            <span class="tag-group__label">Currently learning</span>
+            <div class="tags">
+              <span class="tag">AZ-700</span>
+              <span class="tag">GitHub GH-900</span>
+              <span class="tag">GitHub GH-300</span>
+              <span class="tag">Solutions Architecture</span>
+            </div>
+          </div>
+          <div class="tag-group">
+            <span class="tag-group__label">Stack</span>
+            <div class="tags">
+              <span class="tag">Azure</span>
+              <span class="tag">Microsoft 365</span>
+              <span class="tag">Entra ID</span>
+              <span class="tag">PowerShell</span>
+              <span class="tag">Networking</span>
+            </div>
+          </div>
+          <div class="tag-group">
+            <span class="tag-group__label">Interests</span>
+            <div class="tags">
+              <span class="tag">Home Lab</span>
+              <span class="tag">Pre-Sales</span>
+              <span class="tag">Cloud Cost Optimisation</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== LABS ===================== -->
+  <section class="section labs" id="labs">
+    <div class="section__inner">
+      <div class="section__label">// 02 labs &amp; learning</div>
+      <h2 class="section__heading reveal">Experiments &amp; Notes</h2>
+      <p class="section__sub reveal">
+        Things I'm building, studying, or breaking — documented as I go.
+      </p>
+
+      <div class="cards" id="labCards">
+
+        <!-- CARD: AZ-700 -->
+        <article class="card reveal">
+          <div class="card__meta">
+            <time class="card__date">Apr 2025</time>
+            <span class="card__status card__status--active">In Progress</span>
+          </div>
+          <h3 class="card__title">AZ-700 — Azure Network Engineer</h3>
+          <p class="card__desc">
+            Studying Azure networking concepts: VPN Gateways, ExpressRoute, Azure Firewall, DNS, Load Balancers, and Private Endpoints. Targeting certification by April 2026.
+          </p>
+          <div class="card__footer">
+            <span class="card__type">Certification</span>
+            <!-- <a href="#" class="card__link">View notes ↗</a> -->
+          </div>
+        </article>
+
+        <!-- CARD: GitHub Foundations -->
+        <article class="card reveal">
+          <div class="card__meta">
+            <time class="card__date">2025</time>
+            <span class="card__status card__status--active">In Progress</span>
+          </div>
+          <h3 class="card__title">GitHub Foundations (GH-900)</h3>
+          <p class="card__desc">
+            Building on my Azure background to add GitHub to the stack — repositories, Actions, Codespaces, and GitHub's security features.
+          </p>
+          <div class="card__footer">
+            <span class="card__type">Certification</span>
+          </div>
+        </article>
+
+        <!-- CARD: GitHub Advanced Security -->
+        <article class="card reveal">
+          <div class="card__meta">
+            <time class="card__date">2025</time>
+            <span class="card__status card__status--queued">Queued</span>
+          </div>
+          <h3 class="card__title">GitHub Advanced Security (GH-300)</h3>
+          <p class="card__desc">
+            Next after GH-900 — code scanning, secret detection, dependency review, and security policy enforcement at scale.
+          </p>
+          <div class="card__footer">
+            <span class="card__type">Certification</span>
+          </div>
+        </article>
+
+        <!-- CARD: Home Lab -->
+        <article class="card reveal">
+          <div class="card__meta">
+            <time class="card__date">Ongoing</time>
+            <span class="card__status card__status--active">Active</span>
+          </div>
+          <h3 class="card__title">Home Network Lab</h3>
+          <p class="card__desc">
+            Running a home lab to practice networking concepts hands-on. Exploring Ubiquiti gear, VLANs, and replicating enterprise patterns at home scale.
+          </p>
+          <div class="card__footer">
+            <span class="card__type">Lab</span>
+          </div>
+        </article>
+
+        <!-- CARD: Azure Cost Optimisation -->
+        <article class="card reveal">
+          <div class="card__meta">
+            <time class="card__date">2024</time>
+            <span class="card__status card__status--done">Done</span>
+          </div>
+          <h3 class="card__title">Azure Cost Optimisation Patterns</h3>
+          <p class="card__desc">
+            Notes on using Reservations, Hybrid Benefits, and rightsizing to reduce Azure spend — patterns I apply daily with customers at Ingram Micro.
+          </p>
+          <div class="card__footer">
+            <span class="card__type">Notes</span>
+          </div>
+        </article>
+
+        <!-- CARD: AI-102 Research -->
+        <article class="card reveal">
+          <div class="card__meta">
+            <time class="card__date">2025</time>
+            <span class="card__status card__status--queued">Queued</span>
+          </div>
+          <h3 class="card__title">AI-102 — Azure AI Engineer</h3>
+          <p class="card__desc">
+            Researching the path toward AI-102 as an extension of the Azure stack. Cognitive Services, Azure OpenAI, and responsible AI design.
+          </p>
+          <div class="card__footer">
+            <span class="card__type">Research</span>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== THOUGHTS ===================== -->
+  <section class="section thoughts" id="thoughts">
+    <div class="section__inner">
+      <div class="section__label">// 03 thoughts</div>
+      <h2 class="section__heading reveal">Things on my mind</h2>
+      <p class="section__sub reveal">
+        Half-formed ideas, opinions, and things worth writing down.
+      </p>
+
+      <div class="posts" id="postsList">
+
+        <!-- POST ITEM — duplicate this block to add new posts -->
+        <article class="post reveal">
+          <div class="post__meta">
+            <time class="post__date">Coming soon</time>
+          </div>
+          <h3 class="post__title">Why I'm learning in public</h3>
+          <p class="post__excerpt">
+            Accountability and serendipity. Writing things down forces you to actually understand them — and occasionally someone useful finds your notes.
+          </p>
+          <span class="post__tag">Meta</span>
+        </article>
+
+        <article class="post reveal">
+          <div class="post__meta">
+            <time class="post__date">Coming soon</time>
+          </div>
+          <h3 class="post__title">The jump from admin to architect</h3>
+          <p class="post__excerpt">
+            What changes when you move from operating cloud environments to designing them? More than I expected.
+          </p>
+          <span class="post__tag">Career</span>
+        </article>
+
+        <article class="post reveal">
+          <div class="post__meta">
+            <time class="post__date">Coming soon</time>
+          </div>
+          <h3 class="post__title">CSP migrations: what nobody tells you</h3>
+          <p class="post__excerpt">
+            After hundreds of Azure CSP migrations, I've learned which gotchas will bite you and which fears are overblown.
+          </p>
+          <span class="post__tag">Azure</span>
+        </article>
+
+      </div>
+
+      <!-- Add post CTA placeholder -->
+      <div class="thoughts__cta reveal">
+        <p class="thoughts__cta-text">More posts coming as I write them.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <a href="#hero" class="footer__logo">dc<span class="accent">.</span></a>
+      <div class="footer__links">
+        <a href="https://github.com/diegocruz-0" target="_blank" rel="noopener">GitHub ↗</a>
+        <a href="https://linkedin.com/in/diegocruz" target="_blank" rel="noopener">LinkedIn ↗</a>
+      </div>
+      <p class="footer__copy">© <span id="year"></span> Diego Cruz · Built in public, from Sydney.</p>
+    </div>
+  </footer>
+
+  <!-- Back to top -->
+  <button class="back-top" id="backTop" aria-label="Back to top">↑</button>
+
+  <script src="script.js"></script>
 </body>
 </html>
