@@ -3,310 +3,616 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Diego Cruz — Cloud Engineer</title>
-  <link rel="stylesheet" href="style.css" />
-  <!-- Distinctive font pairing: Syne (display) + IBM Plex Mono (body/code feel) -->
+  <title>Diego Cruz — Cloud Engineer · Sydney</title>
+  <meta name="description" content="Diego Cruz — Cloud Engineer based in Sydney. Azure, AVD, Entra ID, hybrid identity. Writing about what I learn in public." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
   <!-- ===================== NAV ===================== -->
-  <nav class="nav" id="nav">
-    <div class="nav__inner">
-      <a href="#hero" class="nav__logo">dc<span class="accent">.</span></a>
-      <ul class="nav__links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#labs">Labs</a></li>
-        <li><a href="#thoughts">Thoughts</a></li>
-        <li><a href="https://github.com/diegocruz-0" target="_blank" rel="noopener" class="nav__cta">GitHub ↗</a></li>
-      </ul>
-      <button class="nav__burger" id="navBurger" aria-label="Toggle menu">
+  <nav class="nav" id="mainNav">
+    <div class="nav-inner">
+      <a class="nav-logo" onclick="showPage('home')">dc<span>.</span></a>
+      <div class="nav-links" id="navLinks">
+        <a onclick="showPage('home')"    class="active" id="nav-home">~/home</a>
+        <a onclick="showPage('blog')"               id="nav-blog">~/blog</a>
+        <a onclick="showPage('labs')"               id="nav-labs">~/labs</a>
+        <a onclick="showPage('about')"              id="nav-about">~/about</a>
+        <a onclick="showPage('contact')"            id="nav-contact">~/contact</a>
+      </div>
+      <div class="nav-status">open to work</div>
+      <button class="nav-burger" id="burger" aria-label="Toggle menu">
         <span></span><span></span><span></span>
       </button>
     </div>
-    <div class="nav__mobile" id="navMobile">
-      <a href="#about">About</a>
-      <a href="#labs">Labs</a>
-      <a href="#thoughts">Thoughts</a>
-      <a href="https://github.com/diegocruz-0" target="_blank" rel="noopener">GitHub ↗</a>
-    </div>
   </nav>
 
-  <!-- ===================== HERO ===================== -->
-  <section class="hero" id="hero">
-    <!-- Decorative grid lines -->
-    <div class="hero__grid" aria-hidden="true">
-      <span></span><span></span><span></span><span></span><span></span>
+
+  <!-- ===================== HOME PAGE ===================== -->
+  <div class="page active" id="page-home">
+
+    <div class="hero">
+      <div>
+        <div class="hero-eyebrow">Cloud Engineer · Sydney, AU</div>
+        <h1 class="hero-name">Diego<br/>Cruz</h1>
+        <p class="hero-tagline">
+          I build, break, and document Azure environments for a living —
+          and write about it so the next engineer doesn't have to start from scratch.
+        </p>
+
+        <div class="cmd-nav">
+          <div class="cmd" onclick="showPage('labs')">
+            <span class="cmd-prompt">→</span> view labs
+            <span class="cmd-hint">6 write-ups</span>
+          </div>
+          <div class="cmd" onclick="showPage('blog')">
+            <span class="cmd-prompt">→</span> read blog
+            <span class="cmd-hint">5 posts</span>
+          </div>
+          <div class="cmd" onclick="showPage('about')">
+            <span class="cmd-prompt">→</span> about me
+            <span class="cmd-hint">certs · experience</span>
+          </div>
+          <div class="cmd" onclick="showPage('contact')">
+            <span class="cmd-prompt">→</span> contact
+            <span class="cmd-hint">get in touch</span>
+          </div>
+        </div>
+
+        <div class="skills-bar">
+          <div class="skills-bar-label">// current stack</div>
+          <div class="skill-tags">
+            <span class="skill-tag hot">Azure</span>
+            <span class="skill-tag hot">AVD</span>
+            <span class="skill-tag hot">Entra ID</span>
+            <span class="skill-tag hot">FSLogix</span>
+            <span class="skill-tag">AD Hybrid</span>
+            <span class="skill-tag">Exchange Online</span>
+            <span class="skill-tag">PowerShell</span>
+            <span class="skill-tag">NSG / RBAC</span>
+            <span class="skill-tag">AZ-700 ↗</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="terminal">
+        <div class="term-bar">
+          <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+          <span class="term-title">~/diego/status</span>
+        </div>
+        <div class="term-body">
+          <p><span class="tp">→</span> <span class="tc">whoami</span></p>
+          <span class="to">diego_cruz // IaaS Lead, Ingram Micro</span>
+          <br>
+          <p><span class="tp">→</span> <span class="tc">cat certs.txt</span></p>
+          <span class="to">AZ-900 <span class="t-badge green">✓</span></span>
+          <span class="to">AZ-104 <span class="t-badge green">✓</span></span>
+          <span class="to">MS-100 <span class="t-badge green">✓</span></span>
+          <span class="to">MS-101 <span class="t-badge green">✓</span></span>
+          <span class="to">AZ-700 <span class="t-badge amber">in progress</span></span>
+          <span class="to">GH-900 <span class="t-badge blue">queued</span></span>
+          <br>
+          <p><span class="tp">→</span> <span class="tc">echo $NOW</span></p>
+          <span class="to" id="typeTarget">Azure Networking · AVD · Pre-Sales</span>
+          <p class="t-cursor" style="padding-left:1.5em">█</p>
+        </div>
+      </div>
     </div>
 
-    <div class="hero__content">
-      <p class="hero__eyebrow fade-in" style="--delay: 0s">Cloud Engineer · Sydney, AU</p>
-      <h1 class="hero__name fade-in" style="--delay: 0.1s">Diego<br/>Cruz</h1>
-      <p class="hero__tagline fade-in" style="--delay: 0.2s">
-        Learning, building, and experimenting in public.
-      </p>
-      <p class="hero__intro fade-in" style="--delay: 0.3s">
-        I spend my days at the intersection of cloud infrastructure and curiosity —
-        tinkering with Azure environments, chasing certifications, and writing down
-        what I discover so the next person doesn't have to start from scratch.
-      </p>
-      <div class="hero__actions fade-in" style="--delay: 0.4s">
-        <a href="#labs" class="btn btn--primary">View Labs</a>
-        <a href="#thoughts" class="btn btn--ghost">Read Thoughts</a>
+    <!-- Latest Posts -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-label">// blog</span>
+        <h2 class="section-title">Latest Posts</h2>
+        <span class="section-more" onclick="showPage('blog')">view all →</span>
+      </div>
+      <div class="posts-list">
+        <div class="post-item reveal" onclick="showPage('post-fslogix')">
+          <span class="post-date">Apr 2025</span>
+          <div>
+            <div class="post-title">FSLogix in Hybrid Identity AVD: What Nobody Tells You</div>
+            <div class="post-excerpt">Three production issues that cost me two days — documented so they cost you nothing.</div>
+          </div>
+          <span class="post-tag">avd</span>
+        </div>
+        <div class="post-item reveal" onclick="showPage('blog')">
+          <span class="post-date">Mar 2025</span>
+          <div>
+            <div class="post-title">Conditional Access for B2B Guests Without Locking Everyone Out</div>
+            <div class="post-excerpt">Building the right CA policy when you have a mix of members and external guests.</div>
+          </div>
+          <span class="post-tag">identity</span>
+        </div>
+        <div class="post-item reveal" onclick="showPage('blog')">
+          <span class="post-date">Feb 2025</span>
+          <div>
+            <div class="post-title">Azure Reservations vs Savings Plans: 6 Months of Real Data</div>
+            <div class="post-excerpt">What the Microsoft docs don't show you — actual cost comparison from customer environments.</div>
+          </div>
+          <span class="post-tag">finops</span>
+        </div>
       </div>
     </div>
 
-    <!-- Decorative terminal block -->
-    <div class="hero__terminal fade-in" style="--delay: 0.5s" aria-hidden="true">
-      <div class="terminal__bar">
-        <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
-        <span class="terminal__title">~/diego</span>
+    <!-- Latest Labs -->
+    <div class="section" style="padding-top:0">
+      <div class="section-header">
+        <span class="section-label">// labs</span>
+        <h2 class="section-title">Latest Labs</h2>
+        <span class="section-more" onclick="showPage('labs')">view all →</span>
       </div>
-      <div class="terminal__body">
-        <p><span class="t-prompt">→</span> <span class="t-cmd">whoami</span></p>
-        <p class="t-out">diego_cruz</p>
-        <p><span class="t-prompt">→</span> <span class="t-cmd">cat certs.txt</span></p>
-        <p class="t-out">AZ-104 · MS-100 · MS-101 · AZ-900</p>
-        <p class="t-out t-dim">AZ-700 <span class="t-badge">in progress</span></p>
-        <p><span class="t-prompt">→</span> <span class="t-cmd">echo $CURRENT_FOCUS</span></p>
-        <p class="t-out">GitHub Certs · Azure Networking · Pre-Sales</p>
-        <p class="t-cursor">█</p>
+      <div class="cards-grid">
+        <div class="card reveal" onclick="showPage('lab-avd')">
+          <div class="card-meta">
+            <span class="card-date">Mar 2025</span>
+            <span class="card-status s-done">Complete</span>
+          </div>
+          <div class="card-title">AVD End-to-End Hybrid Deployment</div>
+          <div class="card-desc">Full AVD lab: host pool, session hosts, FSLogix on Azure Files, hybrid identity, Conditional Access.</div>
+          <div class="card-foot">
+            <span class="card-type">Lab</span>
+            <span class="card-link" onclick="event.stopPropagation(); showPage('lab-avd')">view lab →</span>
+          </div>
+        </div>
+        <div class="card reveal">
+          <div class="card-meta">
+            <span class="card-date">2025</span>
+            <span class="card-status s-active">In Progress</span>
+          </div>
+          <div class="card-title">Hub-Spoke Topology with Azure Firewall</div>
+          <div class="card-desc">Hub-spoke VNet architecture with Azure Firewall, UDRs, and Private Endpoints.</div>
+          <div class="card-foot"><span class="card-type">Lab</span></div>
+        </div>
+        <div class="card reveal">
+          <div class="card-meta">
+            <span class="card-date">2024</span>
+            <span class="card-status s-done">Complete</span>
+          </div>
+          <div class="card-title">CSP Migration: EA to CSP Without Downtime</div>
+          <div class="card-desc">Step-by-step migration of Azure workloads from Enterprise Agreement to CSP model.</div>
+          <div class="card-foot"><span class="card-type">Notes</span></div>
+        </div>
       </div>
     </div>
-  </section>
+
+    <div style="max-width:1100px; margin:0 auto">
+      <footer class="footer">
+        <div class="footer-logo">dc<span>.</span></div>
+        <div class="footer-links">
+          <a href="https://github.com/diegocruz-0" target="_blank" rel="noopener">github ↗</a>
+          <a href="https://linkedin.com/in/diegocruz" target="_blank" rel="noopener">linkedin ↗</a>
+        </div>
+        <span class="footer-copy">© <span id="yr"></span> Diego Cruz · Sydney, AU</span>
+      </footer>
+    </div>
+  </div><!-- /page-home -->
+
+
+  <!-- ===================== BLOG INDEX ===================== -->
+  <div class="page" id="page-blog">
+    <div class="blog-header">
+      <div class="page-eyebrow">// blog</div>
+      <h1 class="blog-title">Field Notes</h1>
+      <p class="blog-sub">Write-ups, investigations, and things I figured out the hard way.</p>
+    </div>
+    <div class="tag-filter">
+      <span class="filter-label">filter:</span>
+      <span class="filter-tag active" onclick="filterTag(this,'all')">all</span>
+      <span class="filter-tag" onclick="filterTag(this,'azure')">azure</span>
+      <span class="filter-tag" onclick="filterTag(this,'avd')">avd</span>
+      <span class="filter-tag" onclick="filterTag(this,'identity')">identity</span>
+      <span class="filter-tag" onclick="filterTag(this,'finops')">finops</span>
+      <span class="filter-tag" onclick="filterTag(this,'networking')">networking</span>
+    </div>
+    <div class="blog-list-wrap">
+      <div class="posts-list">
+
+        <!--
+          HOW TO ADD A NEW POST:
+          1. Duplicate a post-item div below
+          2. Update data-tags (space-separated), date, title, excerpt, post-tag
+          3. Change onclick to showPage('post-YOUR-ID')
+          4. Add a new page block below with id="page-post-YOUR-ID"
+        -->
+
+        <div class="post-item" data-tags="avd azure identity" onclick="showPage('post-fslogix')">
+          <span class="post-date">Apr 2025</span>
+          <div>
+            <div class="post-title">FSLogix in Hybrid Identity AVD: What Nobody Tells You</div>
+            <div class="post-excerpt">Three production issues that cost me two days — silent mount failures, GPO/MDM conflicts, Azure Files permissions. Documented in full.</div>
+          </div>
+          <span class="post-tag">avd</span>
+        </div>
+        <div class="post-item" data-tags="identity azure" onclick="showPage('blog')">
+          <span class="post-date">Mar 2025</span>
+          <div>
+            <div class="post-title">Conditional Access for B2B Guests Without Locking Everyone Out</div>
+            <div class="post-excerpt">How to scope CA policies to external users without breaking your own people — and how to test safely with Report-Only mode.</div>
+          </div>
+          <span class="post-tag">identity</span>
+        </div>
+        <div class="post-item" data-tags="finops azure" onclick="showPage('blog')">
+          <span class="post-date">Feb 2025</span>
+          <div>
+            <div class="post-title">Azure Reservations vs Savings Plans: 6 Months of Real Data</div>
+            <div class="post-excerpt">A practical comparison from actual customer environments. When to use each, and when the Hybrid Benefit is the better play.</div>
+          </div>
+          <span class="post-tag">finops</span>
+        </div>
+        <div class="post-item" data-tags="azure migration" onclick="showPage('blog')">
+          <span class="post-date">Jan 2025</span>
+          <div>
+            <div class="post-title">The CSP Migration Checklist I Wish I Had: EA to CSP</div>
+            <div class="post-excerpt">After hundreds of migrations, the things that go wrong aren't the ones you planned for. Here's the complete pre-flight list.</div>
+          </div>
+          <span class="post-tag">migration</span>
+        </div>
+        <div class="post-item" data-tags="networking azure" onclick="showPage('blog')">
+          <span class="post-date">2025</span>
+          <div>
+            <div class="post-title">AZ-700 Study Notes: Azure Networking Concepts That Actually Matter</div>
+            <div class="post-excerpt">VPN Gateway vs ExpressRoute, Azure Firewall vs NSG — the concepts that keep showing up in both the exam and real work.</div>
+          </div>
+          <span class="post-tag">networking</span>
+        </div>
+
+      </div>
+    </div>
+  </div><!-- /page-blog -->
+
+
+  <!-- ===================== BLOG POST: FSLogix ===================== -->
+  <!--
+    HOW TO ADD A NEW POST PAGE:
+    1. Duplicate this entire block
+    2. Change id="page-post-YOUR-ID"
+    3. Update all content inside
+  -->
+  <div class="page" id="page-post-fslogix">
+    <div class="post-page">
+      <div class="back-btn" onclick="showPage('blog')">← back to blog</div>
+      <div class="post-page-header">
+        <div class="post-page-date">Apr 2025 · 8 min read</div>
+        <h1 class="post-page-title">FSLogix in Hybrid Identity AVD: What Nobody Tells You</h1>
+        <p class="post-page-excerpt">After deploying AVD in a hybrid identity environment, I ran into three FSLogix issues that cost me two days. Here's what I learned — so it costs you nothing.</p>
+        <div class="post-tags">
+          <span class="post-tag">azure</span>
+          <span class="post-tag">avd</span>
+          <span class="post-tag">fslogix</span>
+          <span class="post-tag">identity</span>
+        </div>
+      </div>
+
+      <div class="post-body">
+        <h2>The Setup</h2>
+        <p>Standard hybrid identity AVD deployment: pooled host pool, Windows 11 multi-session, FSLogix profile containers on Azure Files, GPO applied via on-prem AD. Everything works in the lab. Then you hit production.</p>
+        <div class="callout">
+          <div class="callout-label">// environment</div>
+          AVD pooled host pool · Windows 11 multi-session · Hybrid join · Azure Files (Kerberos auth) · FSLogix 2201 · Azure AD Connect sync
+        </div>
+
+        <h2>Problem 1 — The Silent Mount Failure</h2>
+        <p>FSLogix mounts fail with no useful error in Event Viewer. The user gets a temporary profile and has no idea anything is wrong until their settings vanish.</p>
+        <h3>Root Cause</h3>
+        <p>The storage account's Kerberos ticket isn't being issued because the session host VMs were joined to Entra ID only — not hybrid-joined. Azure Files Kerberos auth requires the computer object to exist in on-prem AD.</p>
+        <div class="code-block"><span class="c-comment"># Check the join state on a session host</span>
+<span class="c-cmd">dsregcmd /status</span> | Select-String <span class="c-str">"AzureAdJoined|DomainJoined"</span>
+
+<span class="c-comment"># Both must be YES for FSLogix + Azure Files Kerberos auth</span>
+AzureAdJoined    : YES
+DomainJoined     : YES  <span class="c-comment"># if NO — that's your problem</span></div>
+        <p>If <code class="inline-code">DomainJoined : NO</code> — your VMs aren't hybrid-joined. You need to re-image with the correct join type. This cannot be fixed post-deployment without re-imaging every VM.</p>
+
+        <h2>Problem 2 — GPO Applying But Not Working</h2>
+        <p>GPRESULT shows the FSLogix policy applied. The registry keys are there. But settings aren't taking effect and users still get temporary profiles.</p>
+        <h3>Root Cause</h3>
+        <p>A conflicting Intune MDM policy was winning over GPO. <strong>When MDM and GPO define the same setting, MDM wins.</strong> The FSLogix VHD location set via GPO was being overwritten by an Intune config profile pointing to a different path.</p>
+        <div class="callout">
+          <div class="callout-label">// lesson</div>
+          Always run <code class="inline-code">MDMDiagReport</code> alongside GPRESULT on AVD session hosts. Intune doesn't announce conflicts.
+        </div>
+
+        <h2>Problem 3 — Azure Files Access Denied</h2>
+        <p>Users authenticate successfully. But they get "Access Denied" when FSLogix tries to create the profile container.</p>
+        <h3>Root Cause</h3>
+        <p>Azure Files requires both RBAC (data plane access) AND NTFS permissions. RBAC alone isn't enough.</p>
+        <div class="code-block"><span class="c-comment"># Step 1: RBAC on the storage account</span>
+<span class="c-comment"># Storage File Data SMB Share Contributor → regular users</span>
+<span class="c-comment"># Storage File Data SMB Share Elevated Contributor → admins</span>
+
+<span class="c-comment"># Step 2: NTFS permissions — from a domain-joined host</span>
+<span class="c-cmd">icacls</span> <span class="c-str">\\storageaccount.file.core.windows.net\share</span> /grant <span class="c-str">"domain\users:(M)"</span>
+
+<span class="c-comment"># ⚠ Cannot set NTFS perms from an Entra-only joined machine</span></div>
+
+        <h2>Summary</h2>
+        <table class="issue-table">
+          <tr><th>Issue</th><th>Root Cause</th><th>Fix</th></tr>
+          <tr><td>Silent mount failure</td><td>VMs not hybrid-joined</td><td>Re-image with hybrid join</td></tr>
+          <tr><td>GPO not taking effect</td><td>Intune MDM conflict</td><td>Exclude VMs from Intune profile</td></tr>
+          <tr><td>Access Denied on share</td><td>Missing NTFS permissions</td><td>Set perms from domain-joined host</td></tr>
+        </table>
+
+        <h2>Lessons Learned</h2>
+        <p>Plan the identity join type <strong>before</strong> deploying session hosts. Hybrid join cannot be retrofitted without re-imaging every VM.</p>
+        <p>Run <code class="inline-code">MDMDiagReport</code> on every session host as part of your checklist. When Intune and GPO clash, MDM wins silently.</p>
+        <p>Azure Files permissions are a two-layer model: RBAC for authentication, NTFS for authorisation. Set NTFS from a domain-joined machine — it won't work from an Entra-only host.</p>
+      </div>
+    </div>
+  </div><!-- /page-post-fslogix -->
+
+
+  <!-- ===================== LABS INDEX ===================== -->
+  <div class="page" id="page-labs">
+    <div class="labs-header">
+      <div class="page-eyebrow">// labs</div>
+      <h1 class="labs-title">Lab Journal</h1>
+      <p class="labs-sub">Hands-on experiments — architecture, steps, issues, and lessons documented in full.</p>
+    </div>
+    <div class="labs-grid">
+
+      <!--
+        HOW TO ADD A NEW LAB CARD:
+        1. Duplicate a lab-card div
+        2. Update onclick to showPage('lab-YOUR-ID')
+        3. Update status, title, desc, meta tags
+        4. Add a new lab detail page block with id="page-lab-YOUR-ID"
+      -->
+
+      <div class="lab-card" onclick="showPage('lab-avd')">
+        <div class="lab-difficulty"><span class="card-status s-done">Complete</span> · Intermediate · ~6 hrs</div>
+        <div class="lab-card-title">Azure Virtual Desktop — End-to-End Hybrid Deployment</div>
+        <div class="lab-card-desc">Full AVD stack: host pool, session hosts, FSLogix on Azure Files, hybrid identity, Conditional Access. Everything needed for a production-ready deployment.</div>
+        <div class="lab-meta"><span>avd</span><span>·</span><span>azure</span><span>·</span><span>fslogix</span><span>·</span><span>identity</span></div>
+      </div>
+      <div class="lab-card">
+        <div class="lab-difficulty"><span class="card-status s-active">In Progress</span> · Intermediate · ~4 hrs</div>
+        <div class="lab-card-title">Hub-Spoke Network Topology with Azure Firewall</div>
+        <div class="lab-card-desc">Designing a hub-spoke VNet with Azure Firewall as the central inspection point. UDRs, Private Endpoints, DNS across peered VNets.</div>
+        <div class="lab-meta"><span>networking</span><span>·</span><span>azure firewall</span><span>·</span><span>az-700</span></div>
+      </div>
+      <div class="lab-card">
+        <div class="lab-difficulty"><span class="card-status s-done">Complete</span> · Beginner · ~2 hrs</div>
+        <div class="lab-card-title">Entra ID Conditional Access — B2B Guest Policy</div>
+        <div class="lab-card-desc">Building and testing a CA policy scoped to B2B guest users. MFA enforcement, trusted location exclusions, Report-Only mode testing.</div>
+        <div class="lab-meta"><span>identity</span><span>·</span><span>conditional access</span><span>·</span><span>entra id</span></div>
+      </div>
+      <div class="lab-card">
+        <div class="lab-difficulty"><span class="card-status s-done">Complete</span> · Beginner · ~1 hr</div>
+        <div class="lab-card-title">Azure RBAC — Custom Role Design and Assignment</div>
+        <div class="lab-card-desc">Minimal-privilege custom RBAC roles for common support scenarios. Cross-tenant role assignment and scope inheritance patterns.</div>
+        <div class="lab-meta"><span>rbac</span><span>·</span><span>azure</span><span>·</span><span>security</span></div>
+      </div>
+      <div class="lab-card">
+        <div class="lab-difficulty"><span class="card-status s-queued">Queued</span> · Advanced · ~8 hrs</div>
+        <div class="lab-card-title">GitHub Actions CI/CD for Azure Infrastructure</div>
+        <div class="lab-card-desc">Azure infra deployments via GitHub Actions using OIDC (no secrets). Bicep templates, environment approvals, drift detection.</div>
+        <div class="lab-meta"><span>github</span><span>·</span><span>azure</span><span>·</span><span>devops</span></div>
+      </div>
+      <div class="lab-card">
+        <div class="lab-difficulty"><span class="card-status s-done">Complete</span> · Intermediate · ~3 hrs</div>
+        <div class="lab-card-title">FSLogix Cloud Cache — Multi-Region Profile Redundancy</div>
+        <div class="lab-card-desc">FSLogix Cloud Cache with two Azure Files accounts in different regions. Failover testing and latency impact analysis.</div>
+        <div class="lab-meta"><span>fslogix</span><span>·</span><span>avd</span><span>·</span><span>ha</span></div>
+      </div>
+
+    </div>
+  </div><!-- /page-labs -->
+
+
+  <!-- ===================== LAB DETAIL: AVD ===================== -->
+  <!--
+    HOW TO ADD A NEW LAB DETAIL PAGE:
+    1. Duplicate this entire block
+    2. Change id="page-lab-YOUR-ID"
+    3. Update all content — problem, arch, steps, issues, lessons
+  -->
+  <div class="page" id="page-lab-avd">
+    <div class="lab-detail">
+      <div class="back-btn" onclick="showPage('labs')">← back to labs</div>
+
+      <div class="lab-detail-header">
+        <div class="page-eyebrow">// lab · complete · intermediate · ~6 hrs</div>
+        <h1 class="lab-detail-title">Azure Virtual Desktop<br/>End-to-End Hybrid Deployment</h1>
+        <div class="post-tags">
+          <span class="post-tag">avd</span>
+          <span class="post-tag">azure</span>
+          <span class="post-tag">fslogix</span>
+          <span class="post-tag">identity</span>
+          <span class="post-tag">networking</span>
+        </div>
+      </div>
+
+      <div class="lab-section">
+        <div class="lab-section-title">Problem</div>
+        <p class="lab-text">I needed hands-on experience with a full AVD deployment that mirrors production — not just spinning up a host pool, but the full stack: hybrid identity, FSLogix profiles, GPO, Conditional Access, and networking. AVD documentation covers each piece in isolation. This lab documents the full end-to-end.</p>
+      </div>
+
+      <div class="lab-section">
+        <div class="lab-section-title">Architecture</div>
+        <div class="arch-block">
+┌─────────────────────────────────────────────────────────┐
+│                     Azure Tenant                        │
+│                                                         │
+│  ┌──────────────┐      ┌──────────────────────────┐     │
+│  │  Entra ID    │◄────►│  Azure AD Connect Sync   │     │
+│  └──────┬───────┘      └────────────┬─────────────┘     │
+│         │                           │                   │
+│  ┌──────▼───────────────────────────▼──────────────┐    │
+│  │              AVD Host Pool (Pooled)              │    │
+│  │   ┌─────────────────┐  ┌──────────────────┐     │    │
+│  │   │  Session Host 1 │  │  Session Host 2  │     │    │
+│  │   │  (Hybrid Joined)│  │  (Hybrid Joined) │     │    │
+│  │   └────────┬────────┘  └────────┬──────────┘    │    │
+│  └────────────┼────────────────────┼───────────────┘    │
+│               └──────────┬─────────┘                    │
+│  ┌────────────────────────▼──────────────────────────┐  │
+│  │   Azure Files (Premium · LRS)                     │  │
+│  │   FSLogix Profile Containers (VHDx)               │  │
+│  └───────────────────────────────────────────────────┘  │
+│  ┌────────────────────────────────────────────────────┐  │
+│  │   Conditional Access (AVD + MFA enforced)          │  │
+│  └────────────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────────┘
+           │ Azure AD Connect Sync
+    ┌──────▼──────────┐
+    │  On-Premises AD │  (GPO source for FSLogix settings)
+    └─────────────────┘</div>
+      </div>
+
+      <div class="lab-section">
+        <div class="lab-section-title">Steps</div>
+        <div class="step-list">
+          <div class="step"><span class="step-num">01.</span><span class="step-text">Create Resource Group, VNet (10.0.0.0/24) with AVD-Hosts-Subnet and AD-Subnet. Configure DNS to point to on-prem DC IP.</span></div>
+          <div class="step"><span class="step-num">02.</span><span class="step-text">Deploy on-prem AD domain controller VM. Configure AD DS, DNS, create OU structure for AVD computer objects.</span></div>
+          <div class="step"><span class="step-num">03.</span><span class="step-text">Configure Azure AD Connect on the DC VM. Enable Password Hash Sync. Verify user sync to Entra ID.</span></div>
+          <div class="step"><span class="step-num">04.</span><span class="step-text">Create AVD Host Pool (pooled, BreadthFirst), Application Group, and Workspace. Assign users to Application Group.</span></div>
+          <div class="step"><span class="step-num">05.</span><span class="step-text">Deploy session host VMs using the AVD gallery image (Windows 11 multi-session + M365). Configure as hybrid-joined during provisioning.</span></div>
+          <div class="step"><span class="step-num">06.</span><span class="step-text">Create Azure Files Premium storage account. Enable Kerberos auth for AD DS. Assign Storage File Data SMB Share Contributor RBAC to Users group.</span></div>
+          <div class="step"><span class="step-num">07.</span><span class="step-text">Set NTFS permissions on the share from a domain-joined host using icacls. Users: Modify. Admins: Full Control. SYSTEM: Full Control.</span></div>
+          <div class="step"><span class="step-num">08.</span><span class="step-text">Create GPO targeting the AVD computer OU. Configure FSLogix: VHDLocations, DeleteLocalProfileWhenVHDShouldApply, FlipFlopProfileDirectoryName.</span></div>
+          <div class="step"><span class="step-num">09.</span><span class="step-text">Create Conditional Access policy: require MFA for AVD app. Set Report-Only first, test thoroughly, then enforce.</span></div>
+          <div class="step"><span class="step-num">10.</span><span class="step-text">Test: sign in as test user, verify FSLogix mounts in Event Viewer > FSLogix logs, confirm VHDx created in Azure Files share.</span></div>
+        </div>
+      </div>
+
+      <div class="lab-section">
+        <div class="lab-section-title">Issues Faced</div>
+        <table class="issue-table">
+          <tr><th>Issue</th><th>Root Cause</th><th>Fix</th></tr>
+          <tr><td>FSLogix silent mount failure</td><td>Session hosts Entra-only joined, not hybrid</td><td>Re-imaged with hybrid join at provisioning</td></tr>
+          <tr><td>GPO FSLogix settings ignored</td><td>Intune MDM policy conflicting</td><td>Excluded session hosts from Intune device group</td></tr>
+          <tr><td>Azure Files Access Denied</td><td>RBAC set but NTFS permissions missing</td><td>Set NTFS perms from domain-joined host</td></tr>
+          <tr><td>CA policy blocked all users</td><td>Break-glass account not excluded</td><td>Always exclude break-glass. Always.</td></tr>
+        </table>
+      </div>
+
+      <div class="lab-section">
+        <div class="lab-section-title">Lessons Learned</div>
+        <div class="lesson-list">
+          <div class="lesson">Plan the identity join type before deploying session hosts. Hybrid join cannot be retrofitted — re-imaging every VM is the only fix.</div>
+          <div class="lesson">Azure Files permissions are a two-layer model: RBAC (authentication) + NTFS (authorisation). NTFS must be set from a domain-joined machine.</div>
+          <div class="lesson">Always run CA policies in Report-Only mode for at least a week. Complete lockout — not degraded experience — is the failure mode.</div>
+          <div class="lesson">Run MDMDiagReport alongside GPRESULT. When Intune and GPO collide on the same setting, MDM wins silently.</div>
+          <div class="lesson">Cost for this lab: ~$1.80 AUD for 6 hours. Deallocate all VMs between sessions. Only the storage account persists (&lt;$2/month).</div>
+        </div>
+      </div>
+    </div>
+  </div><!-- /page-lab-avd -->
+
 
   <!-- ===================== ABOUT ===================== -->
-  <section class="section about" id="about">
-    <div class="section__inner">
-      <div class="section__label">// 01 about</div>
-      <h2 class="section__heading reveal">Who I am</h2>
+  <div class="page" id="page-about">
+    <div class="about-wrap">
 
-      <div class="about__grid">
-        <div class="about__text reveal">
-          <p>
-            I'm a Cloud Engineer based in Sydney with over 8 years in IT infrastructure.
-            My comfort zone is Microsoft Azure and M365, but I'm always reaching past the edges of what I already know —
-            whether that's diving into networking architecture, exploring pre-sales engineering, or chasing a new certification.
-          </p>
-          <p>
-            This space is my public notebook. I use it to document experiments, share half-formed ideas,
-            and keep myself accountable to the learning I say I'm doing.
-          </p>
-          <p>
-            When I'm not in the cloud, I'm probably running a home lab, watching football, or overcooking something on the BBQ.
-          </p>
+      <div class="about-intro">
+        <div class="page-eyebrow">// about</div>
+        <h1 class="about-name">Diego Cruz</h1>
+        <p class="about-role">IaaS Lead · Ingram Micro Cloud · Sydney, Australia</p>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-text">
+          <p>I'm a Cloud Engineer with over <strong>8 years in IT infrastructure</strong>, currently working as IaaS Lead at Ingram Micro in Sydney — supporting Azure and M365 environments across the A/NZ market.</p>
+          <p>My day-to-day involves Azure architecture conversations, AVD deployments, hybrid identity troubleshooting, and helping partners understand the right cloud models for their customers. I've worked through hundreds of CSP migrations and I genuinely enjoy the puzzle of a complex environment.</p>
+          <p>I learn best by doing — this site is my public lab journal. Writing things down forces clarity, and occasionally someone finds a note that saves them a few hours.</p>
+          <p>Outside the terminal: I follow Brazilian football (and the Socceroos), I cook — proper BBQ, slow roasts, soups — and I have a cat who has strong opinions about when I should stop working.</p>
         </div>
 
-        <div class="about__tags reveal">
-          <!-- Core interest tags -->
-          <div class="tag-group">
-            <span class="tag-group__label">Currently learning</span>
-            <div class="tags">
-              <span class="tag">AZ-700</span>
-              <span class="tag">GitHub GH-900</span>
-              <span class="tag">GitHub GH-300</span>
-              <span class="tag">Solutions Architecture</span>
-            </div>
-          </div>
-          <div class="tag-group">
-            <span class="tag-group__label">Stack</span>
-            <div class="tags">
-              <span class="tag">Azure</span>
-              <span class="tag">Microsoft 365</span>
-              <span class="tag">Entra ID</span>
-              <span class="tag">PowerShell</span>
-              <span class="tag">Networking</span>
-            </div>
-          </div>
-          <div class="tag-group">
-            <span class="tag-group__label">Interests</span>
-            <div class="tags">
-              <span class="tag">Home Lab</span>
-              <span class="tag">Pre-Sales</span>
-              <span class="tag">Cloud Cost Optimisation</span>
-            </div>
+        <div>
+          <div class="about-section-label">// certifications</div>
+          <div class="cert-list">
+            <div class="cert-item"><span class="cert-name">AZ-900 Azure Fundamentals</span><span class="cert-badge cert-earned">✓ earned</span></div>
+            <div class="cert-item"><span class="cert-name">AZ-104 Administrator Associate</span><span class="cert-badge cert-earned">✓ earned</span></div>
+            <div class="cert-item"><span class="cert-name">MS-100 Identity and Services</span><span class="cert-badge cert-earned">✓ earned</span></div>
+            <div class="cert-item"><span class="cert-name">MS-101 Mobility and Security</span><span class="cert-badge cert-earned">✓ earned</span></div>
+            <div class="cert-item"><span class="cert-name">MCT 2021–2026</span><span class="cert-badge cert-earned">✓ active</span></div>
+            <div class="cert-item"><span class="cert-name">AZ-700 Network Engineer</span><span class="cert-badge cert-wip">in progress</span></div>
+            <div class="cert-item"><span class="cert-name">GH-900 GitHub Foundations</span><span class="cert-badge cert-wip">queued</span></div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- ===================== LABS ===================== -->
-  <section class="section labs" id="labs">
-    <div class="section__inner">
-      <div class="section__label">// 02 labs &amp; learning</div>
-      <h2 class="section__heading reveal">Experiments &amp; Notes</h2>
-      <p class="section__sub reveal">
-        Things I'm building, studying, or breaking — documented as I go.
-      </p>
-
-      <div class="cards" id="labCards">
-
-        <!-- CARD: AZ-700 -->
-        <article class="card reveal">
-          <div class="card__meta">
-            <time class="card__date">Apr 2025</time>
-            <span class="card__status card__status--active">In Progress</span>
+      <div class="human-section">
+        <div class="about-section-label">// outside the terminal</div>
+        <div class="human-grid">
+          <div class="human-item">
+            <div class="human-icon">⚽</div>
+            <div class="human-label">Sport</div>
+            <div class="human-val">Brazilian football · Socceroos · 2026 World Cup</div>
           </div>
-          <h3 class="card__title">AZ-700 — Azure Network Engineer</h3>
-          <p class="card__desc">
-            Studying Azure networking concepts: VPN Gateways, ExpressRoute, Azure Firewall, DNS, Load Balancers, and Private Endpoints. Targeting certification by April 2026.
-          </p>
-          <div class="card__footer">
-            <span class="card__type">Certification</span>
-            <!-- <a href="#" class="card__link">View notes ↗</a> -->
+          <div class="human-item">
+            <div class="human-icon">🔥</div>
+            <div class="human-label">Cooking</div>
+            <div class="human-val">BBQ · slow roasts · soups · experimenting</div>
           </div>
-        </article>
-
-        <!-- CARD: GitHub Foundations -->
-        <article class="card reveal">
-          <div class="card__meta">
-            <time class="card__date">2025</time>
-            <span class="card__status card__status--active">In Progress</span>
+          <div class="human-item">
+            <div class="human-icon">🐱</div>
+            <div class="human-label">Companion</div>
+            <div class="human-val">One opinionated cat</div>
           </div>
-          <h3 class="card__title">GitHub Foundations (GH-900)</h3>
-          <p class="card__desc">
-            Building on my Azure background to add GitHub to the stack — repositories, Actions, Codespaces, and GitHub's security features.
-          </p>
-          <div class="card__footer">
-            <span class="card__type">Certification</span>
-          </div>
-        </article>
-
-        <!-- CARD: GitHub Advanced Security -->
-        <article class="card reveal">
-          <div class="card__meta">
-            <time class="card__date">2025</time>
-            <span class="card__status card__status--queued">Queued</span>
-          </div>
-          <h3 class="card__title">GitHub Advanced Security (GH-300)</h3>
-          <p class="card__desc">
-            Next after GH-900 — code scanning, secret detection, dependency review, and security policy enforcement at scale.
-          </p>
-          <div class="card__footer">
-            <span class="card__type">Certification</span>
-          </div>
-        </article>
-
-        <!-- CARD: Home Lab -->
-        <article class="card reveal">
-          <div class="card__meta">
-            <time class="card__date">Ongoing</time>
-            <span class="card__status card__status--active">Active</span>
-          </div>
-          <h3 class="card__title">Home Network Lab</h3>
-          <p class="card__desc">
-            Running a home lab to practice networking concepts hands-on. Exploring Ubiquiti gear, VLANs, and replicating enterprise patterns at home scale.
-          </p>
-          <div class="card__footer">
-            <span class="card__type">Lab</span>
-          </div>
-        </article>
-
-        <!-- CARD: Azure Cost Optimisation -->
-        <article class="card reveal">
-          <div class="card__meta">
-            <time class="card__date">2024</time>
-            <span class="card__status card__status--done">Done</span>
-          </div>
-          <h3 class="card__title">Azure Cost Optimisation Patterns</h3>
-          <p class="card__desc">
-            Notes on using Reservations, Hybrid Benefits, and rightsizing to reduce Azure spend — patterns I apply daily with customers at Ingram Micro.
-          </p>
-          <div class="card__footer">
-            <span class="card__type">Notes</span>
-          </div>
-        </article>
-
-        <!-- CARD: AI-102 Research -->
-        <article class="card reveal">
-          <div class="card__meta">
-            <time class="card__date">2025</time>
-            <span class="card__status card__status--queued">Queued</span>
-          </div>
-          <h3 class="card__title">AI-102 — Azure AI Engineer</h3>
-          <p class="card__desc">
-            Researching the path toward AI-102 as an extension of the Azure stack. Cognitive Services, Azure OpenAI, and responsible AI design.
-          </p>
-          <div class="card__footer">
-            <span class="card__type">Research</span>
-          </div>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== THOUGHTS ===================== -->
-  <section class="section thoughts" id="thoughts">
-    <div class="section__inner">
-      <div class="section__label">// 03 thoughts</div>
-      <h2 class="section__heading reveal">Things on my mind</h2>
-      <p class="section__sub reveal">
-        Half-formed ideas, opinions, and things worth writing down.
-      </p>
-
-      <div class="posts" id="postsList">
-
-        <!-- POST ITEM — duplicate this block to add new posts -->
-        <article class="post reveal">
-          <div class="post__meta">
-            <time class="post__date">Coming soon</time>
-          </div>
-          <h3 class="post__title">Why I'm learning in public</h3>
-          <p class="post__excerpt">
-            Accountability and serendipity. Writing things down forces you to actually understand them — and occasionally someone useful finds your notes.
-          </p>
-          <span class="post__tag">Meta</span>
-        </article>
-
-        <article class="post reveal">
-          <div class="post__meta">
-            <time class="post__date">Coming soon</time>
-          </div>
-          <h3 class="post__title">The jump from admin to architect</h3>
-          <p class="post__excerpt">
-            What changes when you move from operating cloud environments to designing them? More than I expected.
-          </p>
-          <span class="post__tag">Career</span>
-        </article>
-
-        <article class="post reveal">
-          <div class="post__meta">
-            <time class="post__date">Coming soon</time>
-          </div>
-          <h3 class="post__title">CSP migrations: what nobody tells you</h3>
-          <p class="post__excerpt">
-            After hundreds of Azure CSP migrations, I've learned which gotchas will bite you and which fears are overblown.
-          </p>
-          <span class="post__tag">Azure</span>
-        </article>
-
-      </div>
-
-      <!-- Add post CTA placeholder -->
-      <div class="thoughts__cta reveal">
-        <p class="thoughts__cta-text">More posts coming as I write them.</p>
+        </div>
       </div>
 
     </div>
-  </section>
+  </div><!-- /page-about -->
 
-  <!-- ===================== FOOTER ===================== -->
-  <footer class="footer">
-    <div class="footer__inner">
-      <a href="#hero" class="footer__logo">dc<span class="accent">.</span></a>
-      <div class="footer__links">
-        <a href="https://github.com/diegocruz-0" target="_blank" rel="noopener">GitHub ↗</a>
-        <a href="https://linkedin.com/in/diegocruz" target="_blank" rel="noopener">LinkedIn ↗</a>
+
+  <!-- ===================== CONTACT ===================== -->
+  <div class="page" id="page-contact">
+    <div class="contact-wrap">
+      <div>
+        <div class="page-eyebrow">// contact</div>
+        <h1 class="contact-title">Get in touch</h1>
+        <p class="contact-sub">Open to technical conversations, Azure questions, and the right opportunities.</p>
       </div>
-      <p class="footer__copy">© <span id="year"></span> Diego Cruz · Built in public, from Sydney.</p>
-    </div>
-  </footer>
 
-  <!-- Back to top -->
+      <div class="contact-terminal">
+        <div class="term-bar">
+          <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+          <span class="term-title">~/contact</span>
+        </div>
+        <div class="term-body" style="line-height:2.2">
+          <p><span class="tp">→</span> <span class="tc">cat message.txt</span></p>
+          <span class="to">Hi Diego, I'm reaching out because...</span>
+          <br>
+          <p><span class="tp">→</span> <span class="tc">send --via linkedin</span></p>
+          <span class="to" style="color:var(--green)">✓ linkedin.com/in/diegocruz</span>
+          <br>
+          <p><span class="tp">→</span> <span class="tc">echo $EMAIL</span></p>
+          <span class="to">Diego.cruz1042@hotmail.com</span>
+          <p class="t-cursor" style="padding-left:1.5em">█</p>
+        </div>
+      </div>
+
+      <div class="contact-links">
+        <a class="contact-link" href="https://linkedin.com/in/diegocruz" target="_blank" rel="noopener">
+          <div class="cl-label">// linkedin</div>
+          <div class="cl-val">linkedin.com/in/diegocruz ↗</div>
+        </a>
+        <a class="contact-link" href="https://github.com/diegocruz-0" target="_blank" rel="noopener">
+          <div class="cl-label">// github</div>
+          <div class="cl-val">github.com/diegocruz-0 ↗</div>
+        </a>
+        <a class="contact-link" href="mailto:Diego.cruz1042@hotmail.com">
+          <div class="cl-label">// email</div>
+          <div class="cl-val">Diego.cruz1042@hotmail.com ↗</div>
+        </a>
+        <div class="contact-link" style="cursor:default">
+          <div class="cl-label">// location</div>
+          <div class="cl-val" style="color:var(--muted)">Sydney, NSW · Australia</div>
+        </div>
+      </div>
+
+      <p class="contact-note">Best for: Azure technical conversations, AVD / hybrid identity, pre-sales opportunities, and open roles in cloud architecture or solutions engineering.</p>
+    </div>
+  </div><!-- /page-contact -->
+
+
+  <!-- Back to top button -->
   <button class="back-top" id="backTop" aria-label="Back to top">↑</button>
 
   <script src="script.js"></script>
