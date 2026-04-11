@@ -15,15 +15,14 @@
   <!-- ===================== NAV ===================== -->
   <nav class="nav" id="mainNav">
     <div class="nav-inner">
-      <a class="nav-logo" onclick="showPage('home')">dc<span>.</span></a>
+      <a class="nav-logo" data-page="home">dc<span>.</span></a>
       <div class="nav-links" id="navLinks">
-        <a onclick="showPage('home')"    class="active" id="nav-home">~/home</a>
-        <a onclick="showPage('blog')"               id="nav-blog">~/blog</a>
-        <a onclick="showPage('labs')"               id="nav-labs">~/labs</a>
-        <a onclick="showPage('about')"              id="nav-about">~/about</a>
-        <a onclick="showPage('contact')"            id="nav-contact">~/contact</a>
+        <a class="active" id="nav-home"    data-page="home">~/home</a>
+        <a               id="nav-blog"    data-page="blog">~/blog</a>
+        <a               id="nav-labs"    data-page="labs">~/labs</a>
+        <a               id="nav-about"   data-page="about">~/about</a>
+        <a               id="nav-contact" data-page="contact">~/contact</a>
       </div>
-
       <button class="nav-burger" id="burger" aria-label="Toggle menu">
         <span></span><span></span><span></span>
       </button>
@@ -44,19 +43,19 @@
         </p>
 
         <div class="cmd-nav">
-          <div class="cmd" onclick="showPage('labs')">
+          <div class="cmd" data-page="labs">
             <span class="cmd-prompt">→</span> view labs
             <span class="cmd-hint">6 write-ups</span>
           </div>
-          <div class="cmd" onclick="showPage('blog')">
+          <div class="cmd" data-page="blog">
             <span class="cmd-prompt">→</span> read blog
             <span class="cmd-hint">5 posts</span>
           </div>
-          <div class="cmd" onclick="showPage('about')">
+          <div class="cmd" data-page="about">
             <span class="cmd-prompt">→</span> about me
             <span class="cmd-hint">certs · experience</span>
           </div>
-          <div class="cmd" onclick="showPage('contact')">
+          <div class="cmd" data-page="contact">
             <span class="cmd-prompt">→</span> contact
             <span class="cmd-hint">get in touch</span>
           </div>
@@ -107,10 +106,10 @@
       <div class="section-header">
         <span class="section-label">// blog</span>
         <h2 class="section-title">Latest Posts</h2>
-        <span class="section-more" onclick="showPage('blog')">view all →</span>
+        <span class="section-more" data-page="blog">view all →</span>
       </div>
       <div class="posts-list">
-        <div class="post-item reveal" onclick="showPage('post-fslogix')">
+        <div class="post-item reveal" data-page="post-fslogix">
           <span class="post-date">Apr 2025</span>
           <div>
             <div class="post-title">FSLogix in Hybrid Identity AVD: What Nobody Tells You</div>
@@ -118,7 +117,7 @@
           </div>
           <span class="post-tag">avd</span>
         </div>
-        <div class="post-item reveal" onclick="showPage('blog')">
+        <div class="post-item reveal" data-page="blog">
           <span class="post-date">Mar 2025</span>
           <div>
             <div class="post-title">Conditional Access for B2B Guests Without Locking Everyone Out</div>
@@ -126,7 +125,7 @@
           </div>
           <span class="post-tag">identity</span>
         </div>
-        <div class="post-item reveal" onclick="showPage('blog')">
+        <div class="post-item reveal" data-page="blog">
           <span class="post-date">Feb 2025</span>
           <div>
             <div class="post-title">Azure Reservations vs Savings Plans: 6 Months of Real Data</div>
@@ -142,10 +141,10 @@
       <div class="section-header">
         <span class="section-label">// labs</span>
         <h2 class="section-title">Latest Labs</h2>
-        <span class="section-more" onclick="showPage('labs')">view all →</span>
+        <span class="section-more" data-page="labs">view all →</span>
       </div>
       <div class="cards-grid">
-        <div class="card reveal" onclick="showPage('lab-avd')">
+        <div class="card reveal" data-page="lab-avd">
           <div class="card-meta">
             <span class="card-date">Mar 2025</span>
             <span class="card-status s-done">Complete</span>
@@ -154,7 +153,7 @@
           <div class="card-desc">Full AVD lab: host pool, session hosts, FSLogix on Azure Files, hybrid identity, Conditional Access.</div>
           <div class="card-foot">
             <span class="card-type">Lab</span>
-            <span class="card-link" onclick="event.stopPropagation(); showPage('lab-avd')">view lab →</span>
+            <span class="card-link" data-page="lab-avd">view lab →</span>
           </div>
         </div>
         <div class="card reveal">
@@ -180,7 +179,7 @@
 
     <div style="max-width:1100px; margin:0 auto">
       <footer class="footer">
-        <div class="footer-logo">dc<span>.</span></div>
+        <div class="footer-logo" data-page="home">dc<span>.</span></div>
         <div class="footer-links">
           <a href="https://github.com/diegocruz-0" target="_blank" rel="noopener">github ↗</a>
           <a href="https://linkedin.com/in/diegocruz" target="_blank" rel="noopener">linkedin ↗</a>
@@ -200,25 +199,17 @@
     </div>
     <div class="tag-filter">
       <span class="filter-label">filter:</span>
-      <span class="filter-tag active" onclick="filterTag(this,'all')">all</span>
-      <span class="filter-tag" onclick="filterTag(this,'azure')">azure</span>
-      <span class="filter-tag" onclick="filterTag(this,'avd')">avd</span>
-      <span class="filter-tag" onclick="filterTag(this,'identity')">identity</span>
-      <span class="filter-tag" onclick="filterTag(this,'finops')">finops</span>
-      <span class="filter-tag" onclick="filterTag(this,'networking')">networking</span>
+      <span class="filter-tag active" data-tag="all">all</span>
+      <span class="filter-tag" data-tag="azure">azure</span>
+      <span class="filter-tag" data-tag="avd">avd</span>
+      <span class="filter-tag" data-tag="identity">identity</span>
+      <span class="filter-tag" data-tag="finops">finops</span>
+      <span class="filter-tag" data-tag="networking">networking</span>
     </div>
     <div class="blog-list-wrap">
       <div class="posts-list">
 
-        <!--
-          HOW TO ADD A NEW POST:
-          1. Duplicate a post-item div below
-          2. Update data-tags (space-separated), date, title, excerpt, post-tag
-          3. Change onclick to showPage('post-YOUR-ID')
-          4. Add a new page block below with id="page-post-YOUR-ID"
-        -->
-
-        <div class="post-item" data-tags="avd azure identity" onclick="showPage('post-fslogix')">
+        <div class="post-item" data-tags="avd azure identity" data-page="post-fslogix">
           <span class="post-date">Apr 2025</span>
           <div>
             <div class="post-title">FSLogix in Hybrid Identity AVD: What Nobody Tells You</div>
@@ -226,7 +217,7 @@
           </div>
           <span class="post-tag">avd</span>
         </div>
-        <div class="post-item" data-tags="identity azure" onclick="showPage('blog')">
+        <div class="post-item" data-tags="identity azure" data-page="blog">
           <span class="post-date">Mar 2025</span>
           <div>
             <div class="post-title">Conditional Access for B2B Guests Without Locking Everyone Out</div>
@@ -234,7 +225,7 @@
           </div>
           <span class="post-tag">identity</span>
         </div>
-        <div class="post-item" data-tags="finops azure" onclick="showPage('blog')">
+        <div class="post-item" data-tags="finops azure" data-page="blog">
           <span class="post-date">Feb 2025</span>
           <div>
             <div class="post-title">Azure Reservations vs Savings Plans: 6 Months of Real Data</div>
@@ -242,7 +233,7 @@
           </div>
           <span class="post-tag">finops</span>
         </div>
-        <div class="post-item" data-tags="azure migration" onclick="showPage('blog')">
+        <div class="post-item" data-tags="azure migration" data-page="blog">
           <span class="post-date">Jan 2025</span>
           <div>
             <div class="post-title">The CSP Migration Checklist I Wish I Had: EA to CSP</div>
@@ -250,7 +241,7 @@
           </div>
           <span class="post-tag">migration</span>
         </div>
-        <div class="post-item" data-tags="networking azure" onclick="showPage('blog')">
+        <div class="post-item" data-tags="networking azure" data-page="blog">
           <span class="post-date">2025</span>
           <div>
             <div class="post-title">AZ-700 Study Notes: Azure Networking Concepts That Actually Matter</div>
@@ -265,15 +256,9 @@
 
 
   <!-- ===================== BLOG POST: FSLogix ===================== -->
-  <!--
-    HOW TO ADD A NEW POST PAGE:
-    1. Duplicate this entire block
-    2. Change id="page-post-YOUR-ID"
-    3. Update all content inside
-  -->
   <div class="page" id="page-post-fslogix">
     <div class="post-page">
-      <div class="back-btn" onclick="showPage('blog')">← back to blog</div>
+      <div class="back-btn" data-page="blog">← back to blog</div>
       <div class="post-page-header">
         <div class="post-page-date">Apr 2025 · 8 min read</div>
         <h1 class="post-page-title">FSLogix in Hybrid Identity AVD: What Nobody Tells You</h1>
@@ -309,7 +294,7 @@ DomainJoined     : YES  <span class="c-comment"># if NO — that's your problem<
         <h2>Problem 2 — GPO Applying But Not Working</h2>
         <p>GPRESULT shows the FSLogix policy applied. The registry keys are there. But settings aren't taking effect and users still get temporary profiles.</p>
         <h3>Root Cause</h3>
-        <p>A conflicting Intune MDM policy was winning over GPO. <strong>When MDM and GPO define the same setting, MDM wins.</strong> The FSLogix VHD location set via GPO was being overwritten by an Intune config profile pointing to a different path.</p>
+        <p>A conflicting Intune MDM policy was winning over GPO. <strong>When MDM and GPO define the same setting, MDM wins.</strong></p>
         <div class="callout">
           <div class="callout-label">// lesson</div>
           Always run <code class="inline-code">MDMDiagReport</code> alongside GPRESULT on AVD session hosts. Intune doesn't announce conflicts.
@@ -326,7 +311,7 @@ DomainJoined     : YES  <span class="c-comment"># if NO — that's your problem<
 <span class="c-comment"># Step 2: NTFS permissions — from a domain-joined host</span>
 <span class="c-cmd">icacls</span> <span class="c-str">\\storageaccount.file.core.windows.net\share</span> /grant <span class="c-str">"domain\users:(M)"</span>
 
-<span class="c-comment"># ⚠ Cannot set NTFS perms from an Entra-only joined machine</span></div>
+<span class="c-comment"># Cannot set NTFS perms from an Entra-only joined machine</span></div>
 
         <h2>Summary</h2>
         <table class="issue-table">
@@ -339,7 +324,7 @@ DomainJoined     : YES  <span class="c-comment"># if NO — that's your problem<
         <h2>Lessons Learned</h2>
         <p>Plan the identity join type <strong>before</strong> deploying session hosts. Hybrid join cannot be retrofitted without re-imaging every VM.</p>
         <p>Run <code class="inline-code">MDMDiagReport</code> on every session host as part of your checklist. When Intune and GPO clash, MDM wins silently.</p>
-        <p>Azure Files permissions are a two-layer model: RBAC for authentication, NTFS for authorisation. Set NTFS from a domain-joined machine — it won't work from an Entra-only host.</p>
+        <p>Azure Files permissions are a two-layer model: RBAC for authentication, NTFS for authorisation. Set NTFS from a domain-joined machine.</p>
       </div>
     </div>
   </div><!-- /page-post-fslogix -->
@@ -354,15 +339,7 @@ DomainJoined     : YES  <span class="c-comment"># if NO — that's your problem<
     </div>
     <div class="labs-grid">
 
-      <!--
-        HOW TO ADD A NEW LAB CARD:
-        1. Duplicate a lab-card div
-        2. Update onclick to showPage('lab-YOUR-ID')
-        3. Update status, title, desc, meta tags
-        4. Add a new lab detail page block with id="page-lab-YOUR-ID"
-      -->
-
-      <div class="lab-card" onclick="showPage('lab-avd')">
+      <div class="lab-card" data-page="lab-avd">
         <div class="lab-difficulty"><span class="card-status s-done">Complete</span> · Intermediate · ~6 hrs</div>
         <div class="lab-card-title">Azure Virtual Desktop — End-to-End Hybrid Deployment</div>
         <div class="lab-card-desc">Full AVD stack: host pool, session hosts, FSLogix on Azure Files, hybrid identity, Conditional Access. Everything needed for a production-ready deployment.</div>
@@ -404,15 +381,9 @@ DomainJoined     : YES  <span class="c-comment"># if NO — that's your problem<
 
 
   <!-- ===================== LAB DETAIL: AVD ===================== -->
-  <!--
-    HOW TO ADD A NEW LAB DETAIL PAGE:
-    1. Duplicate this entire block
-    2. Change id="page-lab-YOUR-ID"
-    3. Update all content — problem, arch, steps, issues, lessons
-  -->
   <div class="page" id="page-lab-avd">
     <div class="lab-detail">
-      <div class="back-btn" onclick="showPage('labs')">← back to labs</div>
+      <div class="back-btn" data-page="labs">← back to labs</div>
 
       <div class="lab-detail-header">
         <div class="page-eyebrow">// lab · complete · intermediate · ~6 hrs</div>
@@ -475,7 +446,7 @@ DomainJoined     : YES  <span class="c-comment"># if NO — that's your problem<
           <div class="step"><span class="step-num">07.</span><span class="step-text">Set NTFS permissions on the share from a domain-joined host using icacls. Users: Modify. Admins: Full Control. SYSTEM: Full Control.</span></div>
           <div class="step"><span class="step-num">08.</span><span class="step-text">Create GPO targeting the AVD computer OU. Configure FSLogix: VHDLocations, DeleteLocalProfileWhenVHDShouldApply, FlipFlopProfileDirectoryName.</span></div>
           <div class="step"><span class="step-num">09.</span><span class="step-text">Create Conditional Access policy: require MFA for AVD app. Set Report-Only first, test thoroughly, then enforce.</span></div>
-          <div class="step"><span class="step-num">10.</span><span class="step-text">Test: sign in as test user, verify FSLogix mounts in Event Viewer > FSLogix logs, confirm VHDx created in Azure Files share.</span></div>
+          <div class="step"><span class="step-num">10.</span><span class="step-text">Test: sign in as test user, verify FSLogix mounts in Event Viewer, confirm VHDx created in Azure Files share.</span></div>
         </div>
       </div>
 
@@ -495,7 +466,7 @@ DomainJoined     : YES  <span class="c-comment"># if NO — that's your problem<
         <div class="lesson-list">
           <div class="lesson">Plan the identity join type before deploying session hosts. Hybrid join cannot be retrofitted — re-imaging every VM is the only fix.</div>
           <div class="lesson">Azure Files permissions are a two-layer model: RBAC (authentication) + NTFS (authorisation). NTFS must be set from a domain-joined machine.</div>
-          <div class="lesson">Always run CA policies in Report-Only mode for at least a week. Complete lockout — not degraded experience — is the failure mode.</div>
+          <div class="lesson">Always run CA policies in Report-Only mode for at least a week. Complete lockout is the failure mode — not degraded experience.</div>
           <div class="lesson">Run MDMDiagReport alongside GPRESULT. When Intune and GPO collide on the same setting, MDM wins silently.</div>
           <div class="lesson">Cost for this lab: ~$1.80 AUD for 6 hours. Deallocate all VMs between sessions. Only the storage account persists (&lt;$2/month).</div>
         </div>
@@ -583,7 +554,7 @@ DomainJoined     : YES  <span class="c-comment"># if NO — that's your problem<
           <span class="to" style="color:var(--green)">✓ linkedin.com/in/diegocruz</span>
           <br>
           <p><span class="tp">→</span> <span class="tc">echo $EMAIL</span></p>
-          <span class="to"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b2f6dbd7d5dd9cd1c0c7c883828680f2daddc6dfd3dbde9cd1dddf">[email&#160;protected]</a></span>
+          <span class="to">Diego.cruz1042@hotmail.com</span>
           <p class="t-cursor" style="padding-left:1.5em">█</p>
         </div>
       </div>
@@ -597,9 +568,9 @@ DomainJoined     : YES  <span class="c-comment"># if NO — that's your problem<
           <div class="cl-label">// github</div>
           <div class="cl-val">github.com/diegocruz-0 ↗</div>
         </a>
-        <a class="contact-link" href="/cdn-cgi/l/email-protection#97d3fef2f0f8b9f4e5e2eda6a7a3a5d7fff8e3faf6fefbb9f4f8fa">
+        <a class="contact-link" href="mailto:Diego.cruz1042@hotmail.com">
           <div class="cl-label">// email</div>
-          <div class="cl-val"><span class="__cf_email__" data-cfemail="f4b09d91939bda9786818ec5c4c0c6b49c9b8099959d98da979b99">[email&#160;protected]</span> ↗</div>
+          <div class="cl-val">Diego.cruz1042@hotmail.com ↗</div>
         </a>
         <div class="contact-link" style="cursor:default">
           <div class="cl-label">// location</div>
@@ -607,4 +578,13 @@ DomainJoined     : YES  <span class="c-comment"># if NO — that's your problem<
         </div>
       </div>
 
-      <p class="contact-note">Best for: Azure technical conversations, AVD / hybrid identity, pre-sales opportuni
+      <p class="contact-note">Best for: Azure technical conversations, AVD / hybrid identity, pre-sales opportunities, and open roles in cloud architecture or solutions engineering.</p>
+    </div>
+  </div><!-- /page-contact -->
+
+
+  <button class="back-top" id="backTop" aria-label="Back to top">↑</button>
+
+  <script src="script.js"></script>
+</body>
+</html>

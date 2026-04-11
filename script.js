@@ -1,38 +1,33 @@
 /* =============================================
    DIEGO CRUZ — diegocruz.com.au
-   script.js
+   script.js — CSP-safe, no inline onclick
+   All navigation uses data-page attributes
    ============================================= */
 
-/* ─── Current year in footer ─────────────────── */
-document.getElementById('yr').textContent = new Date().getFullYear();
+/* ─── Current year ───────────────────────────── */
+const yrEl = document.getElementById('yr');
+if (yrEl) yrEl.textContent = new Date().getFullYear();
 
 
 /* ─── Page navigation ─────────────────────────── */
-/*
-  This site uses a single-page app approach —
-  all sections are divs that show/hide via JS.
-
-  To add a new page:
-  1. Add a div with id="page-YOUR-ID" in index.html
-  2. Add a nav link with id="nav-YOUR-ID" pointing to it
-  3. Call showPage('YOUR-ID') from any onclick
-*/
 function showPage(id) {
   // Hide all pages
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  // Remove active state from all nav links
+
+  // Remove active from all nav links
   document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
 
-  // Show target page
+  // Show the target page
   const page = document.getElementById('page-' + id);
   if (page) {
     page.classList.add('active');
     window.scrollTo(0, 0);
   }
 
-  // Highlight matching nav link (uses first segment of id, e.g. 'post' → 'nav-post')
-  const navId = 'nav-' + id.split('-')[0];
-  const navLink = document.getElementById(navId);
+  // Highlight the matching nav link
+  // Uses the first segment of the id e.g. 'post-fslogix' → looks for 'nav-post', falls back to 'nav-home'
+  const primaryId  = 'nav-' + id.split('-')[0];
+  const navLink    = document.getElementById(primaryId);
   if (navLink) navLink.classList.add('active');
 
   // Close mobile menu if open
@@ -40,17 +35,37 @@ function showPage(id) {
 }
 
 
+/* ─── Global click handler (event delegation) ── */
+/*
+  Instead of onclick on every element, we listen at the document level.
+  Any element with data-page="X" will trigger showPage('X').
+  This is CSP-safe — no inline JS needed anywhere in the HTML.
+*/
+document.addEventListener('click', function(e) {
+  // Walk up the DOM tree to find the closest element with data-page
+  const target = e.target.closest('[data-page]');
+  if (!target) return;
+
+  e.preventDefault();
+  const pageId = target.getAttribute('data-page');
+  showPage(pageId);
+});
+
+
 /* ─── Blog tag filter ─────────────────────────── */
 /*
-  Called by onclick on each .filter-tag button.
-  Filters .post-item elements by their data-tags attribute.
-  To add a new tag: add it to the tag-filter bar in index.html
-  and set data-tags="your-tag other-tag" on each post-item.
+  Filter buttons use data-tag attributes.
+  Handled via the same event delegation pattern above.
 */
-function filterTag(el, tag) {
+document.addEventListener('click', function(e) {
+  const filterBtn = e.target.closest('[data-tag]');
+  if (!filterBtn) return;
+
   // Update active filter button
   document.querySelectorAll('.filter-tag').forEach(t => t.classList.remove('active'));
-  el.classList.add('active');
+  filterBtn.classList.add('active');
+
+  const tag = filterBtn.getAttribute('data-tag');
 
   // Show/hide posts
   document.querySelectorAll('#page-blog .post-item').forEach(post => {
@@ -61,7 +76,7 @@ function filterTag(el, tag) {
     const tags = post.dataset.tags || '';
     post.style.display = tags.includes(tag) ? '' : 'none';
   });
-}
+});
 
 
 /* ─── Mobile burger menu ──────────────────────── */
@@ -71,70 +86,64 @@ let menuOpen   = false;
 
 function openMobileMenu() {
   menuOpen = true;
-  navLinks.style.display        = 'flex';
-  navLinks.style.flexDirection  = 'column';
-  navLinks.style.position       = 'absolute';
-  navLinks.style.top            = '64px';
-  navLinks.style.left           = '0';
-  navLinks.style.right          = '0';
-  navLinks.style.background     = 'var(--bg)';
-  navLinks.style.borderBottom   = '1px solid var(--border)';
-  navLinks.style.padding        = '.5rem 1.5rem 1rem';
-  navLinks.style.gap            = '.25rem';
-  navLinks.style.zIndex         = '199';
+  navLinks.style.display       = 'flex';
+  navLinks.style.flexDirection = 'column';
+  navLinks.style.position      = 'absolute';
+  navLinks.style.top           = '64px';
+  navLinks.style.left          = '0';
+  navLinks.style.right         = '0';
+  navLinks.style.background    = 'var(--bg)';
+  navLinks.style.borderBottom  = '1px solid var(--border)';
+  navLinks.style.padding       = '.5rem 1.5rem 1rem';
+  navLinks.style.gap           = '.25rem';
+  navLinks.style.zIndex        = '199';
   burger.setAttribute('aria-expanded', 'true');
 }
 
 function closeMobileMenu() {
   if (!menuOpen) return;
   menuOpen = false;
-  navLinks.style.display = '';
+  navLinks.style.display  = '';
   navLinks.style.position = '';
   burger.setAttribute('aria-expanded', 'false');
 }
 
-burger.addEventListener('click', () => {
-  menuOpen ? closeMobileMenu() : openMobileMenu();
+if (burger) {
+  burger.addEventListener('click', function(e) {
+    e.stopPropagation();
+    menuOpen ? closeMobileMenu() : openMobileMenu();
+  });
+}
+
+// Close when clicking outside the nav
+document.addEventListener('click', function(e) {
+  if (menuOpen && !e.target.closest('.nav-inner')) {
+    closeMobileMenu();
+  }
 });
 
-// Close menu when clicking outside
-document.addEventListener('click', (e) => {
-  if (menuOpen && !e.target.closest('.nav-inner')) closeMobileMenu();
-});
 
-
-/* ─── Back to top button ──────────────────────── */
+/* ─── Back to top ─────────────────────────────── */
 const backTop = document.getElementById('backTop');
 
-window.addEventListener('scroll', () => {
-  backTop.classList.toggle('vis', window.scrollY > 300);
-}, { passive: true });
+if (backTop) {
+  window.addEventListener('scroll', function() {
+    backTop.classList.toggle('vis', window.scrollY > 300);
+  }, { passive: true });
 
-backTop.addEventListener('click', () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-});
-
-
-/* ─── Nav scroll state ────────────────────────── */
-// Subtle border intensification on scroll — already handled via CSS backdrop-filter
-// keeping this slot for any future scroll-based nav tweaks
-window.addEventListener('scroll', () => {
-  // placeholder for scroll-based nav effects
-}, { passive: true });
+  backTop.addEventListener('click', function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
 
 
 /* ─── Typewriter effect ───────────────────────── */
-/*
-  Cycles through the 'lines' array with a typing + deleting loop.
-  Targets the element with id="typeTarget" in the hero terminal.
-  To change the cycling text: edit the lines array below.
-*/
 (function initTypewriter() {
   const lines = [
     'Azure Networking · AVD · Pre-Sales',
     'Hybrid Identity · FSLogix · Entra ID',
     'AZ-700 Study · GH-900 · Building in public',
-    'Ingram Micro · Sydney, AU · Open to work',
+    'Ingram Micro · Sydney, AU',
   ];
 
   let lineIndex  = 0;
@@ -143,7 +152,7 @@ window.addEventListener('scroll', () => {
   let pauseTick  = 0;
 
   const el = document.getElementById('typeTarget');
-  if (!el) return; // guard: only run if element exists
+  if (!el) return;
 
   function tick() {
     const current = lines[lineIndex];
@@ -152,9 +161,9 @@ window.addEventListener('scroll', () => {
       charIndex--;
       el.textContent = current.slice(0, charIndex);
       if (charIndex === 0) {
-        isDeleting  = false;
-        lineIndex   = (lineIndex + 1) % lines.length;
-        pauseTick   = 18; // short pause before typing next line
+        isDeleting = false;
+        lineIndex  = (lineIndex + 1) % lines.length;
+        pauseTick  = 18;
       }
     } else if (pauseTick > 0) {
       pauseTick--;
@@ -163,7 +172,7 @@ window.addEventListener('scroll', () => {
       el.textContent = current.slice(0, charIndex);
       if (charIndex === current.length) {
         isDeleting = true;
-        pauseTick  = 55; // hold the completed string before deleting
+        pauseTick  = 55;
       }
     }
 
@@ -171,20 +180,14 @@ window.addEventListener('scroll', () => {
     setTimeout(tick, speed);
   }
 
-  // Delay start until hero animations settle
   setTimeout(tick, 1800);
 })();
 
 
-/* ─── Scroll-reveal (IntersectionObserver) ───── */
-/*
-  Animates .reveal elements as they enter the viewport.
-  Elements get the 'reveal' class in HTML and are animated via CSS.
-  The observer runs once per element (unobserves after triggering).
-*/
+/* ─── Scroll-reveal ───────────────────────────── */
 const revealObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
+  function(entries) {
+    entries.forEach(function(entry) {
       if (entry.isIntersecting) {
         entry.target.style.animationPlayState = 'running';
         revealObserver.unobserve(entry.target);
@@ -194,8 +197,7 @@ const revealObserver = new IntersectionObserver(
   { threshold: 0.1, rootMargin: '0px 0px -30px 0px' }
 );
 
-// Pause all .reveal animations initially, let observer trigger them
-document.querySelectorAll('.reveal').forEach(el => {
+document.querySelectorAll('.reveal').forEach(function(el) {
   el.style.animationPlayState = 'paused';
   revealObserver.observe(el);
 });
