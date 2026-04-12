@@ -1,4 +1,4 @@
-# Diego Costa — Personal Website
+# Diego Cruz — Personal Website
 
 A warm, editorial personal website built for GitHub Pages.
 
