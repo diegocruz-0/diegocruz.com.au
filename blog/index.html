@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog — Diego Costa</title>
+  <meta name="description" content="Diego Costa's writing on cloud engineering, BBQ, Brazilian Jiu-Jitsu, and life in Sydney.">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="../index.html" class="nav__logo">Diego<span>.</span></a>
+      <ul class="nav__links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../about/index.html">About</a></li>
+        <li><a href="../work/index.html">Work</a></li>
+        <li><a href="../life/index.html">Life</a></li>
+        <li><a href="../blog/index.html">Blog</a></li>
+        <li><a href="../contact/index.html">Contact</a></li>
+      </ul>
+      <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="page-hero page-offset">
+    <div class="container">
+      <span class="eyebrow">Blog</span>
+      <h1>Notes, thoughts,<br>and experiments.</h1>
+      <p class="mt-md" style="max-width: 55ch; font-size: 1.1rem;">
+        Writing about cloud engineering, cooking, BJJ, and whatever else is taking up
+        space in my head at the moment.
+      </p>
+    </div>
+  </div>
+
+  <section>
+    <div class="container" style="max-width: var(--reading-w);">
+
+      <!-- ─ HOW TO ADD A NEW POST ─────────────────────────────────────
+           Duplicate one of the <li> blocks below and update:
+           - data-date: ISO date string, e.g. 2025-06-12
+           - .post-date text: human-readable date
+           - .post-title text: post title
+           - .post-tag: category (optional)
+           - The <p>: post description
+           - The href on the title link: path to your post HTML file
+           ─────────────────────────────────────────────────────────── -->
+
+      <ul class="post-list">
+
+        <li class="post-item reveal" data-date="2025-06-01">
+          <span class="post-date">June 2025</span>
+          <div>
+            <h2 class="post-title">
+              <a href="posts/az700-study-notes.html">
+                AZ-700 study notes: what I've learned about Azure networking so far
+              </a>
+            </h2>
+            <span class="tag" style="margin-bottom: 0.75rem; display: inline-block;">Azure · Certifications</span>
+            <p class="card__text">
+              Midway through my AZ-700 prep, here's what surprised me, what I already knew,
+              and how I'm structuring my study approach around real-world architecture scenarios.
+            </p>
+          </div>
+        </li>
+
+        <li class="post-item reveal" data-date="2025-05-15">
+          <span class="post-date">May 2025</span>
+          <div>
+            <h2 class="post-title">
+              <a href="posts/first-brisket.html">
+                The first Kamado Joe brisket: what worked, what didn't
+              </a>
+            </h2>
+            <span class="tag" style="margin-bottom: 0.75rem; display: inline-block;">BBQ · Cooking</span>
+            <p class="card__text">
+              14 hours, two temperature stalls, one slightly overconfident home cook, and a
+              result that was — honestly — better than expected. Notes from the first proper
+              low-and-slow on the new grill.
+            </p>
+          </div>
+        </li>
+
+        <li class="post-item reveal" data-date="2025-04-20">
+          <span class="post-date">April 2025</span>
+          <div>
+            <h2 class="post-title">
+              <a href="posts/bjj-and-engineering.html">
+                What BJJ taught me about debugging
+              </a>
+            </h2>
+            <span class="tag" style="margin-bottom: 0.75rem; display: inline-block;">BJJ · Engineering</span>
+            <p class="card__text">
+              There's more overlap between grappling and troubleshooting infrastructure
+              than I initially expected. Both require composure, systematic thinking,
+              and the willingness to start from first principles when you're stuck.
+            </p>
+          </div>
+        </li>
+
+        <li class="post-item reveal" data-date="2025-03-10">
+          <span class="post-date">March 2025</span>
+          <div>
+            <h2 class="post-title">
+              <a href="posts/entra-id-rbac.html">
+                Cross-tenant RBAC in Azure: a problem I didn't see coming
+              </a>
+            </h2>
+            <span class="tag" style="margin-bottom: 0.75rem; display: inline-block;">Azure · Entra ID</span>
+            <p class="card__text">
+              Hit an unexpected Forbidden error with cross-tenant role assignments and MSI
+              identity in a production environment. Here's how I diagnosed and resolved it,
+              and why it happens in the first place.
+            </p>
+          </div>
+        </li>
+
+      </ul>
+
+      <!-- Placeholder for when there are no real posts yet -->
+      <div class="reveal mt-lg" style="padding: 2rem; background: var(--cream-dark); border: 1px solid var(--border); border-radius: 4px; text-align: center;">
+        <p style="font-family: var(--font-mono); font-size: 0.82rem; color: var(--slate-light); text-align: center; margin: 0 auto;">
+          📝 To add a new post: copy <code>blog/posts/_template.html</code>, update the content,
+          then add a new &lt;li&gt; to the list above.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <span class="footer__logo">Diego Costa</span>
+        <ul class="footer__links">
+          <li><a href="../about/index.html">About</a></li>
+          <li><a href="../work/index.html">Work</a></li>
+          <li><a href="../blog/index.html">Blog</a></li>
+          <li><a href="../contact/index.html">Contact</a></li>
+        </ul>
+        <span>Sydney, AU · © 2025</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/js/site.js"></script>
+</body>
+</html>
