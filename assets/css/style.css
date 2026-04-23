@@ -608,13 +608,17 @@ section { padding: 6rem 0; }
   .nav__links.open {
     display: flex;
     flex-direction: column;
-    position: fixed;
-    inset: var(--nav-h) 0 0 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    min-height: calc(100dvh - var(--nav-h));
     background: var(--cream);
     padding: 2rem;
     gap: 1.5rem;
     align-items: flex-start;
     border-top: 1px solid var(--border);
+    overflow-y: auto;
     z-index: 99;
   }
   .nav__links.open a { font-size: 1.1rem; }
