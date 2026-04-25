@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Why Azure Virtual Desktop Is a Game-Changer for Enterprise Infrastructure — Diego Cruz</title>
+  <meta name="description" content="AVD isn't just a remote desktop solution. When you understand the security and cost model properly, it fundamentally changes how enterprise organisations think about endpoint infrastructure.">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <style>
+    .post-body { max-width: var(--reading-w); margin: 0 auto; }
+    .post-body h2 { margin-top: 3rem; margin-bottom: 1rem; font-size: 1.6rem; }
+    .post-body h3 { margin-top: 2rem; margin-bottom: 0.75rem; font-size: 1.25rem; }
+    .post-body p  { margin-bottom: 1.25rem; }
+    .post-body ul, .post-body ol { margin: 1rem 0 1.25rem 1.5rem; color: var(--slate-mid); }
+    .post-body li { margin-bottom: 0.5rem; }
+    .post-body code {
+      font-family: var(--font-mono);
+      font-size: 0.88em;
+      background: var(--cream-dark);
+      padding: 0.15em 0.4em;
+      border-radius: 3px;
+      border: 1px solid var(--border);
+    }
+    .post-body .callout {
+      border-left: 3px solid var(--accent);
+      padding: 1rem 1.25rem;
+      background: var(--cream-dark);
+      margin: 1.5rem 0;
+      border-radius: 0 4px 4px 0;
+    }
+    .post-body .callout p { margin: 0; font-size: 0.95rem; }
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .comparison-grid .col {
+      padding: 1.25rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: var(--cream-dark);
+    }
+    .comparison-grid .col h4 {
+      font-size: 0.85rem;
+      font-family: var(--font-mono);
+      letter-spacing: 0.06em;
+      color: var(--slate-light);
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+    }
+    .comparison-grid .col ul {
+      margin: 0;
+      padding-left: 1.25rem;
+      color: var(--slate-mid);
+    }
+    @media (max-width: 600px) {
+      .comparison-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="../../index.html" class="nav__logo">Diego<span>.</span></a>
+      <ul class="nav__links">
+        <li><a href="../../index.html">Home</a></li>
+        <li><a href="../../about/index.html">About</a></li>
+        <li><a href="../../work/index.html">Work</a></li>
+        <li><a href="../../life/index.html">Life</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../contact/index.html">Contact</a></li>
+      </ul>
+      <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="page-hero page-offset">
+    <div class="container post-body">
+      <span class="eyebrow">Technology · Azure · February 2025</span>
+      <h1>Why Azure Virtual Desktop is a game-changer for remote enterprise infrastructure</h1>
+      <p class="mt-md" style="font-size: 1.1rem;">
+        AVD is often sold as a remote desktop solution. That framing undersells it. When you understand the security architecture and cost model properly, it fundamentally changes how enterprise organisations should think about endpoint infrastructure.
+      </p>
+    </div>
+  </div>
+
+  <section>
+    <div class="container post-body">
+
+      <p>
+        I work with organisations across Australia and New Zealand on their Azure environments. When
+        Azure Virtual Desktop comes up in conversation, it's usually framed as a VPN replacement or
+        a work-from-home enablement tool. Those are legitimate use cases. But they're not the reason
+        AVD changes the calculus for enterprise infrastructure teams.
+      </p>
+      <p>
+        The reason AVD matters strategically — particularly for organisations dealing with regulated
+        data, distributed workforces, or ageing physical desktop infrastructure — comes down to two things:
+        where data lives, and what it costs to run Windows at scale in the cloud.
+      </p>
+
+      <h2>The security architecture: data never touches the device</h2>
+
+      <p>
+        Traditional remote access — VPN with a corporate laptop, or even basic RDP — still requires
+        the user's device to be a trusted, managed endpoint. The data flows to the device. If the
+        device is compromised, the data is at risk.
+      </p>
+      <p>
+        AVD inverts this model. The session runs entirely in Azure. The user's device — regardless of
+        whether it's a corporate laptop, a personal MacBook, a thin client, or an iPad — receives
+        only a display stream. No data is downloaded to the local device during a session. Clipboard
+        and file transfer policies can be enforced at the session level, meaning you can completely
+        prevent data exfiltration to the local endpoint.
+      </p>
+
+      <div class="callout">
+        <p><strong>The security implication:</strong> With AVD, your security perimeter is Azure and Entra ID — not the physical device. You can extend access to contractors, BYOD users, and remote workers without exposing corporate data to unmanaged endpoints.</p>
+      </div>
+
+      <h3>How this changes your security model</h3>
+
+      <div class="comparison-grid">
+        <div class="col">
+          <h4>Traditional model</h4>
+          <ul>
+            <li>Data flows to endpoint</li>
+            <li>Endpoint must be managed and compliant</li>
+            <li>VPN extends the network perimeter</li>
+            <li>BYOD is a security risk</li>
+            <li>Data loss depends on endpoint security</li>
+          </ul>
+        </div>
+        <div class="col">
+          <h4>AVD model</h4>
+          <ul>
+            <li>Data stays in Azure</li>
+            <li>Endpoint only renders the display</li>
+            <li>Access controlled via Entra ID + CA</li>
+            <li>BYOD is manageable with policy</li>
+            <li>Data loss prevented at session layer</li>
+          </ul>
+        </div>
+      </div>
+
+      <p>
+        This matters particularly for industries with data sovereignty requirements — financial services,
+        healthcare, legal, government — where data residency and control are not optional. With AVD,
+        you can guarantee that sensitive data never leaves a specific Azure region, regardless of
+        where the user is physically located.
+      </p>
+
+      <h2>Multi-session Windows 11: the cost story</h2>
+
+      <p>
+        Here's where AVD becomes financially interesting, and where I've seen it change conversations
+        in customer environments significantly.
+      </p>
+      <p>
+        Azure Virtual Desktop is the <em>only</em> service in Azure that lets you run Windows 11
+        Enterprise in a multi-session configuration — multiple concurrent users sharing a single VM.
+        This is not available anywhere else. Standard Azure VMs running Windows Server can do
+        multi-session via RDS, but Windows 11 multi-session is exclusive to AVD.
+      </p>
+      <p>
+        Why does this matter? Because the licensing and compute economics of multi-session
+        Windows 11 can significantly reduce the cost of providing desktop infrastructure for
+        shift-based or task-focused workers.
+      </p>
+
+      <h3>The licensing advantage</h3>
+      <p>
+        For organisations with Microsoft 365 E3/E5 or Windows E3/E5 licensing, AVD is included —
+        you don't pay additional Windows licensing costs for AVD sessions. You pay only for the
+        Azure compute and storage. Combined with:
+      </p>
+      <ul>
+        <li><strong>Azure Reservations</strong>: Pre-paying for 1 or 3 years of compute at 40-60% discount</li>
+        <li><strong>Azure Hybrid Benefit</strong>: Using existing Windows Server licences with Software Assurance to reduce VM costs</li>
+        <li><strong>Autoscaling host pools</strong>: VMs scale down during off-hours, eliminating idle compute spend</li>
+      </ul>
+      <p>
+        The total cost of ownership for AVD — particularly when replacing ageing physical desktop
+        infrastructure — often comes out significantly lower than refreshing physical endpoints,
+        especially when you factor in the reduced management overhead and security tooling.
+      </p>
+
+      <h2>The Conditional Access layer</h2>
+
+      <p>
+        Because AVD integrates natively with Entra ID, you get the full power of Conditional Access
+        applied to your desktop sessions. This means you can enforce:
+      </p>
+      <ul>
+        <li>MFA on every session start (or step-up MFA for specific resources)</li>
+        <li>Device compliance requirements (even for BYOD, via Intune enrollment or compliant app policies)</li>
+        <li>Named location restrictions — sessions only from approved countries or network ranges</li>
+        <li>Session risk-based policies via Entra Identity Protection</li>
+      </ul>
+      <p>
+        Combined with Microsoft Defender for Endpoint integration, you get comprehensive visibility
+        into session behaviour and can respond to threats at the session layer rather than chasing
+        them at the endpoint layer.
+      </p>
+
+      <h2>Where AVD makes sense — and where it doesn't</h2>
+
+      <p>
+        AVD is not the right solution for every workload. It doesn't make sense for:
+      </p>
+      <ul>
+        <li>GPU-intensive workloads like CAD or 3D rendering (though Azure has NV-series VMs for this, it's expensive)</li>
+        <li>Applications with very low latency requirements</li>
+        <li>Users in locations with poor or unreliable internet connectivity</li>
+        <li>Small organisations where the management overhead of an AVD environment isn't justified</li>
+      </ul>
+      <p>
+        It does make strong sense for:
+      </p>
+      <ul>
+        <li>Task workers (call centres, back-office, data entry) on standardised desktop configurations</li>
+        <li>Regulated industries with strict data residency and access control requirements</li>
+        <li>Organisations with distributed global workforces accessing a centralised data environment</li>
+        <li>Contractors and third parties who need secure access to internal systems without corporate device provisioning</li>
+        <li>Disaster recovery and business continuity scenarios where physical desktop availability is a risk</li>
+      </ul>
+
+      <h2>Getting the architecture right</h2>
+
+      <p>
+        AVD deployments fail when they're treated as a lift-and-shift of an on-premises RDS environment.
+        The design considerations that matter most:
+      </p>
+      <ul>
+        <li><strong>Image management</strong>: A well-managed golden image and regular update cadence is the difference between an AVD environment that's easy to maintain and one that becomes a support nightmare</li>
+        <li><strong>FSLogix profile containers</strong>: User profiles stored in Azure Files or Azure NetApp Files — getting this right is critical for user experience and login performance</li>
+        <li><strong>Host pool sizing</strong>: Understanding your users' actual workload patterns and sizing session hosts accordingly (over-provisioning is expensive; under-provisioning is worse)</li>
+        <li><strong>Network topology</strong>: AVD sessions traverse the internet to Azure — the ExpressRoute or VPN design for hybrid environments needs to account for this traffic pattern</li>
+      </ul>
+
+      <div class="quote-block">
+        <p>"The organisations that get the most out of AVD are the ones that treat it as an identity-first, security-first infrastructure decision — not a remote access convenience."</p>
+      </div>
+
+      <p>
+        If your organisation is evaluating AVD or you're an IT professional making the case internally,
+        the conversation should start with security posture and cost model — not with remote desktop
+        features. That's where the compelling argument is.
+      </p>
+
+      <div style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border);">
+        <a href="../../blog/index.html" class="btn btn--ghost">← Back to blog</a>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <span class="footer__logo">Diego Cruz</span>
+        <ul class="footer__links">
+          <li><a href="../../about/index.html">About</a></li>
+          <li><a href="../../work/index.html">Work</a></li>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../contact/index.html">Contact</a></li>
+        </ul>
+        <span>Sydney, AU · © 2025</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/site.js"></script>
+</body>
+</html>

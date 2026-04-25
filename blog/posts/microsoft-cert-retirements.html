@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Microsoft Certification Retirements: How to Stay Relevant — Diego Cruz</title>
+  <meta name="description" content="Microsoft is retiring certifications and restructuring its credential roadmap. Here's how to read the shift from legacy admin to role-based cloud architect — and what to do about it.">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <style>
+    .post-body { max-width: var(--reading-w); margin: 0 auto; }
+    .post-body h2 { margin-top: 3rem; margin-bottom: 1rem; font-size: 1.6rem; }
+    .post-body h3 { margin-top: 2rem; margin-bottom: 0.75rem; font-size: 1.25rem; }
+    .post-body p  { margin-bottom: 1.25rem; }
+    .post-body ul, .post-body ol { margin: 1rem 0 1.25rem 1.5rem; color: var(--slate-mid); }
+    .post-body li { margin-bottom: 0.5rem; }
+    .post-body code {
+      font-family: var(--font-mono);
+      font-size: 0.88em;
+      background: var(--cream-dark);
+      padding: 0.15em 0.4em;
+      border-radius: 3px;
+      border: 1px solid var(--border);
+    }
+    .post-body .callout {
+      border-left: 3px solid var(--accent);
+      padding: 1rem 1.25rem;
+      background: var(--cream-dark);
+      margin: 1.5rem 0;
+      border-radius: 0 4px 4px 0;
+    }
+    .post-body .callout p { margin: 0; font-size: 0.95rem; }
+    .cert-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.9rem;
+    }
+    .cert-table th {
+      text-align: left;
+      padding: 0.6rem 0.8rem;
+      background: var(--slate);
+      color: var(--cream);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+    }
+    .cert-table td {
+      padding: 0.6rem 0.8rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--slate-mid);
+    }
+    .cert-table tr:last-child td { border-bottom: none; }
+    .cert-table tr:nth-child(even) td { background: var(--cream-dark); }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="../../index.html" class="nav__logo">Diego<span>.</span></a>
+      <ul class="nav__links">
+        <li><a href="../../index.html">Home</a></li>
+        <li><a href="../../about/index.html">About</a></li>
+        <li><a href="../../work/index.html">Work</a></li>
+        <li><a href="../../life/index.html">Life</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../contact/index.html">Contact</a></li>
+      </ul>
+      <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="page-hero page-offset">
+    <div class="container post-body">
+      <span class="eyebrow">Career · Certifications · March 2025</span>
+      <h1>Microsoft retiring certifications: how to read the shift and stay relevant</h1>
+      <p class="mt-md" style="font-size: 1.1rem;">
+        The retirement of MS-100 and MS-101 isn't just an administrative change — it signals a deliberate repositioning of what Microsoft expects a cloud professional to look like. Here's how to interpret it and plan accordingly.
+      </p>
+    </div>
+  </div>
+
+  <section>
+    <div class="container post-body">
+
+      <p>
+        If you've been in the Microsoft ecosystem for a while, you've watched the certification landscape
+        change significantly. Exams get retired, consolidated, and replaced. Sometimes the changes feel
+        arbitrary. Sometimes — if you look carefully — they signal something real about where the
+        industry is heading.
+      </p>
+      <p>
+        The retirement of MS-100 (Microsoft 365 Identity and Services) and MS-101 (Microsoft 365 Mobility
+        and Security), and their consolidation into MS-102 (Microsoft 365 Administrator Expert), along
+        with the emergence of SC-300 (Identity and Access Administrator Associate) as a distinct
+        specialisation — this one is worth paying attention to.
+      </p>
+      <p>
+        I hold both MS-100 and MS-101. I sat those exams at a time when the Microsoft 365 Administrator
+        path represented a clear career track for senior IT professionals managing enterprise tenants.
+        Here's how I read the changes, and what I think it means for cloud professionals charting
+        a certification path today.
+      </p>
+
+      <h2>The shift: from broad administrator to role-based specialist</h2>
+
+      <p>
+        The old Microsoft 365 Expert track (MS-100 + MS-101) assumed a single highly capable administrator
+        who understood <em>everything</em> about an M365 tenant: identity, compliance, security, device
+        management, Exchange, SharePoint, Teams. That was a realistic role description five years ago.
+      </p>
+      <p>
+        The new model reflects what enterprise organisations actually look like now: teams of specialists,
+        not generalist admins. Microsoft's certification restructure mirrors this:
+      </p>
+
+      <table class="cert-table">
+        <thead>
+          <tr>
+            <th>Old model</th>
+            <th>New model</th>
+            <th>Focus area</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>MS-100 + MS-101 → M365 Expert</td>
+            <td>MS-102 → M365 Administrator Expert</td>
+            <td>Tenant administration, Teams, compliance</td>
+          </tr>
+          <tr>
+            <td>(Identity covered within MS-100)</td>
+            <td>SC-300 → Identity and Access Administrator</td>
+            <td>Entra ID, Conditional Access, Identity Governance, PIM</td>
+          </tr>
+          <tr>
+            <td>(Security covered within MS-101)</td>
+            <td>SC-200 → Security Operations Analyst</td>
+            <td>Microsoft Sentinel, Defender XDR, threat investigation</td>
+          </tr>
+          <tr>
+            <td>(Compliance covered within MS-101)</td>
+            <td>SC-400 → Information Protection Admin</td>
+            <td>Data classification, DLP, retention, Purview</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>
+        This isn't fragmentation for its own sake. It reflects the increasing specialisation of cloud
+        security and compliance roles in enterprise organisations. The person managing your identity
+        infrastructure is increasingly a dedicated resource — not someone who also manages your
+        SharePoint site collections.
+      </p>
+
+      <h2>What this means if you hold MS-100 / MS-101</h2>
+
+      <p>
+        Your existing credentials are still valid and still demonstrate meaningful knowledge. The MS-100
+        and MS-101 content covered real depth in identity, Entra ID (then called Azure AD), Exchange
+        Online, and device management. That knowledge doesn't expire when the certification does.
+      </p>
+      <p>
+        But the way you position it matters. A resume or profile that simply lists "MS-100 / MS-101"
+        without translation tells a recruiter less than one that highlights the <em>capabilities</em>
+        those certifications represent:
+      </p>
+      <ul>
+        <li>Deep understanding of hybrid identity architecture (Entra Connect, pass-through auth, federation)</li>
+        <li>Conditional Access policy design and Privileged Identity Management</li>
+        <li>Exchange Online mail flow, hybrid configuration, and compliance features</li>
+        <li>Microsoft Endpoint Manager / Intune device management and compliance policies</li>
+      </ul>
+      <p>
+        Those are the skills. The certification code is just the badge.
+      </p>
+
+      <div class="callout">
+        <p><strong>For job seekers:</strong> If you're describing your MS-100/MS-101 experience on a CV, translate it. "Designed and implemented Conditional Access policies for 1,200-seat M365 tenant" is more useful than "holds MS-100."</p>
+      </div>
+
+      <h2>The path forward</h2>
+
+      <p>
+        If I were advising someone building their certification path today — particularly someone with
+        a background in Microsoft cloud infrastructure — here's how I'd think about it:
+      </p>
+
+      <h3>If your strength is identity and security</h3>
+      <p>
+        SC-300 (Identity and Access Administrator) is the most directly valuable credential right now.
+        Entra ID, Conditional Access, PIM, Identity Protection, and B2B/B2C scenarios are among the
+        most in-demand skills in the market. The SC-300 + AZ-104 combination positions you as someone
+        who can architect both the infrastructure and the identity layer.
+      </p>
+
+      <h3>If your strength is infrastructure and networking</h3>
+      <p>
+        AZ-700 (Network Engineer Associate) deepens the Azure networking knowledge that AZ-104 introduces.
+        Combined with practical hybrid connectivity experience, this positions you as a cloud architect
+        capable of handling the full network design for enterprise environments.
+      </p>
+
+      <h3>If you want to broaden into DevOps</h3>
+      <p>
+        The GitHub certifications (GH-900 Foundations, GH-200 Actions, GH-300 Advanced Security) are
+        increasingly relevant as organisations adopt GitHub for both code and infrastructure-as-code
+        workflows. They signal an understanding of modern development workflows that pure infrastructure
+        certifications don't cover.
+      </p>
+
+      <h2>The principle behind the plan</h2>
+
+      <p>
+        The pattern in Microsoft's certification evolution is consistent: they're mapping credentials to
+        the roles that enterprise organisations actually hire for, not the all-in-one administrator
+        role that smaller IT teams have relied on. The professionals who adapt to this model — who can
+        articulate a specific area of depth rather than general breadth — are better positioned in the
+        current market.
+      </p>
+      <p>
+        That doesn't mean generalists are obsolete. In smaller organisations and MSP environments,
+        breadth still matters. But at the enterprise level, and particularly in cloud-first organisations,
+        the role-based specialist is increasingly what's being hired.
+      </p>
+      <p>
+        The certification retirements are a signal. The question is what you choose to do with it.
+      </p>
+
+      <div style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border);">
+        <a href="../../blog/index.html" class="btn btn--ghost">← Back to blog</a>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <span class="footer__logo">Diego Cruz</span>
+        <ul class="footer__links">
+          <li><a href="../../about/index.html">About</a></li>
+          <li><a href="../../work/index.html">Work</a></li>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../contact/index.html">Contact</a></li>
+        </ul>
+        <span>Sydney, AU · © 2025</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/site.js"></script>
+</body>
+</html>

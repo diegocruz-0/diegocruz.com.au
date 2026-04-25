@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AZ-700 Study Notes — Diego Cruz</title>
+  <meta name="description" content="Midway through AZ-700 prep — what surprised me about Azure networking, what I already knew, and how I'm structuring study around real-world scenarios.">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <style>
+    .post-body { max-width: var(--reading-w); margin: 0 auto; }
+    .post-body h2 { margin-top: 3rem; margin-bottom: 1rem; font-size: 1.6rem; }
+    .post-body h3 { margin-top: 2rem; margin-bottom: 0.75rem; font-size: 1.25rem; }
+    .post-body p  { margin-bottom: 1.25rem; }
+    .post-body ul, .post-body ol { margin: 1rem 0 1.25rem 1.5rem; color: var(--slate-mid); }
+    .post-body li { margin-bottom: 0.5rem; }
+    .post-body code {
+      font-family: var(--font-mono);
+      font-size: 0.88em;
+      background: var(--cream-dark);
+      padding: 0.15em 0.4em;
+      border-radius: 3px;
+      border: 1px solid var(--border);
+    }
+    .post-body pre {
+      background: var(--slate);
+      color: var(--cream);
+      padding: 1.5rem;
+      border-radius: 4px;
+      overflow-x: auto;
+      margin: 1.5rem 0;
+    }
+    .post-body pre code {
+      background: none;
+      border: none;
+      color: inherit;
+      padding: 0;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="../../index.html" class="nav__logo">Diego<span>.</span></a>
+      <ul class="nav__links">
+        <li><a href="../../index.html">Home</a></li>
+        <li><a href="../../about/index.html">About</a></li>
+        <li><a href="../../work/index.html">Work</a></li>
+        <li><a href="../../life/index.html">Life</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../contact/index.html">Contact</a></li>
+      </ul>
+      <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="page-hero page-offset">
+    <div class="container post-body">
+      <span class="eyebrow">Azure · Certifications · June 2025</span>
+      <h1>AZ-700 study notes: what I've learned about Azure networking so far</h1>
+      <p class="mt-md" style="font-size: 1.1rem;">
+        Midway through my AZ-700 prep. Here's what surprised me, what I already knew coming from AZ-104, and how I'm structuring my study approach around real-world architecture scenarios.
+      </p>
+    </div>
+  </div>
+
+  <section>
+    <div class="container post-body">
+
+      <p>
+        I'm about halfway through my AZ-700 (Azure Network Engineer Associate) preparation and it's already
+        proven to be a more interesting certification than I expected. When I started, I assumed it would be
+        a straightforward extension of the networking concepts I'd already covered in AZ-104. I was partially right.
+        The fundamentals transfer. But AZ-700 goes several layers deeper into territory that I've touched
+        in production but never had to fully articulate.
+      </p>
+
+      <h2>What I already knew (and what needed sharpening)</h2>
+
+      <p>
+        Coming from AZ-104 and several years working with Azure environments in a CSP context, I had solid
+        working knowledge of VNets, NSGs, VPN Gateway, and the general hub-and-spoke topology. What I
+        didn't realise is how much <em>decision-making depth</em> AZ-700 tests at.
+      </p>
+      <p>
+        The exam isn't just asking "what is ExpressRoute?" It's asking when ExpressRoute is the right
+        call over a VPN Gateway, what the failover model looks like, when you'd use a Zone-Redundant
+        Gateway SKU versus not, and how that interacts with a specific customer's SLA requirements.
+        That decision-layer thinking is where most of my study time has gone.
+      </p>
+
+      <h2>The things that surprised me</h2>
+
+      <h3>Azure Firewall Premium vs. Azure Firewall Standard</h3>
+      <p>
+        I'd used Azure Firewall in customer environments before, mostly at Standard tier. The Premium
+        SKU's TLS inspection capability — and the architectural requirements it brings around certificate
+        management — is something I hadn't fully understood before starting this exam prep. The way
+        it integrates with Key Vault for certificates is elegant, but it adds real operational complexity
+        that you need to plan for upfront.
+      </p>
+
+      <h3>Private DNS Zones and autoregistration</h3>
+      <p>
+        The DNS resolution chain for private endpoints is more nuanced than the portal makes it look.
+        When you're dealing with cross-region or cross-tenant scenarios, the DNS forwarding setup
+        (particularly with on-premises DNS resolvers) has several failure modes that are worth
+        understanding deeply. I've hit a few of these in production and worked through them intuitively —
+        AZ-700 is giving me the vocabulary to describe what I was actually doing.
+      </p>
+
+      <h3>Application Gateway WAF tuning</h3>
+      <p>
+        The WAF (Web Application Firewall) component of Application Gateway is something I'd mostly
+        treated as a checkbox feature. Learning to think about WAF rule exclusions, custom rules, and
+        the difference between Detection and Prevention mode in the context of specific attack vectors
+        has been one of the more practically useful parts of this exam prep.
+      </p>
+
+      <h2>How I'm structuring my study</h2>
+
+      <p>
+        I've deliberately moved away from video-first learning for this one. My approach:
+      </p>
+      <ul>
+        <li><strong>Microsoft Learn modules first</strong> — for structured coverage of each domain area</li>
+        <li><strong>Lab environment for everything</strong> — if I can't deploy it and break it, I don't really understand it</li>
+        <li><strong>Architecture review</strong> — I read Azure reference architectures for scenarios like hub-and-spoke, DMZ, and hybrid connectivity, then try to reason about the design tradeoffs before reading the justification</li>
+        <li><strong>Customer scenarios as study material</strong> — I work with A/NZ partners on Azure every day. I've started framing real customer questions through the lens of exam topic areas</li>
+      </ul>
+
+      <h2>What's left</h2>
+
+      <p>
+        I still have ExpressRoute Global Reach, Virtual WAN, and the more advanced BGP scenarios to
+        cover properly. Those are the areas where I feel least confident in production experience, so
+        they'll get the most lab time.
+      </p>
+      <p>
+        More notes to come as I push toward the exam. If you're also studying for AZ-700 and want to
+        compare notes, hit me up via the contact page.
+      </p>
+
+      <div style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border);">
+        <a href="../../blog/index.html" class="btn btn--ghost">← Back to blog</a>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <span class="footer__logo">Diego Cruz</span>
+        <ul class="footer__links">
+          <li><a href="../../about/index.html">About</a></li>
+          <li><a href="../../work/index.html">Work</a></li>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../contact/index.html">Contact</a></li>
+        </ul>
+        <span>Sydney, AU · © 2025</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/site.js"></script>
+</body>
+</html>

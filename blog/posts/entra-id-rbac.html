@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cross-Tenant RBAC in Azure — Diego Cruz</title>
+  <meta name="description" content="Hit an unexpected Forbidden error with cross-tenant role assignments and MSI identity in a production environment. Here's how I diagnosed and resolved it.">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <style>
+    .post-body { max-width: var(--reading-w); margin: 0 auto; }
+    .post-body h2 { margin-top: 3rem; margin-bottom: 1rem; font-size: 1.6rem; }
+    .post-body h3 { margin-top: 2rem; margin-bottom: 0.75rem; font-size: 1.25rem; }
+    .post-body p  { margin-bottom: 1.25rem; }
+    .post-body ul, .post-body ol { margin: 1rem 0 1.25rem 1.5rem; color: var(--slate-mid); }
+    .post-body li { margin-bottom: 0.5rem; }
+    .post-body code {
+      font-family: var(--font-mono);
+      font-size: 0.88em;
+      background: var(--cream-dark);
+      padding: 0.15em 0.4em;
+      border-radius: 3px;
+      border: 1px solid var(--border);
+    }
+    .post-body pre {
+      background: var(--slate);
+      color: var(--cream);
+      padding: 1.5rem;
+      border-radius: 4px;
+      overflow-x: auto;
+      margin: 1.5rem 0;
+    }
+    .post-body pre code {
+      background: none;
+      border: none;
+      color: inherit;
+      padding: 0;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="../../index.html" class="nav__logo">Diego<span>.</span></a>
+      <ul class="nav__links">
+        <li><a href="../../index.html">Home</a></li>
+        <li><a href="../../about/index.html">About</a></li>
+        <li><a href="../../work/index.html">Work</a></li>
+        <li><a href="../../life/index.html">Life</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../contact/index.html">Contact</a></li>
+      </ul>
+      <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="page-hero page-offset">
+    <div class="container post-body">
+      <span class="eyebrow">Azure · Entra ID · March 2025</span>
+      <h1>Cross-tenant RBAC in Azure: a problem I didn't see coming</h1>
+      <p class="mt-md" style="font-size: 1.1rem;">
+        Hit an unexpected <code>AuthorizationFailed</code> error with cross-tenant role assignments and MSI identity in a production environment. Here's how I diagnosed and resolved it, and why it happens.
+      </p>
+    </div>
+  </div>
+
+  <section>
+    <div class="container post-body">
+
+      <p>
+        I was working with a partner on a multi-tenant Azure setup — a common pattern in CSP environments
+        where a service provider manages resources across multiple customer tenants. The architecture
+        involved a managed identity (MSI) on a resource in Tenant A that needed to call an API and
+        write to storage in Tenant B. On the surface, this seems straightforward. In practice, it
+        required understanding some non-obvious constraints in how Entra ID handles cross-tenant
+        identity and RBAC.
+      </p>
+
+      <h2>The error</h2>
+
+      <p>
+        The managed identity was configured, the role assignment was in place, and the application
+        was still returning <code>AuthorizationFailed (403)</code> when attempting to write to the
+        Blob Storage in Tenant B. The error message was not particularly helpful — it identified the
+        principal but didn't explain why the assignment wasn't being honoured.
+      </p>
+
+      <h2>What was actually happening</h2>
+
+      <p>
+        Managed identities are fundamentally scoped to their home tenant. A system-assigned managed
+        identity created in Tenant A is an object in Tenant A's Entra ID directory. When it tries to
+        access resources in Tenant B, Tenant B needs to trust a representation of that identity —
+        and by default, it doesn't know about it.
+      </p>
+      <p>
+        The role assignment I'd created in Tenant B was pointing to the managed identity's object ID
+        from Tenant A. But from Tenant B's perspective, that object ID doesn't correspond to any
+        known principal — it's not in their directory. So the assignment existed, but Azure's
+        authorisation engine in Tenant B couldn't resolve the principal and the request was denied.
+      </p>
+
+      <h2>The resolution</h2>
+
+      <p>
+        The correct approach for true cross-tenant access with managed identity involves using
+        <strong>workload identity federation</strong> or establishing a <strong>B2B service principal</strong>
+        in the target tenant. For this specific scenario, we used the B2B approach:
+      </p>
+      <ol>
+        <li>Create a service principal representation of the managed identity in Tenant B (via an app registration or by inviting the MSI as an external identity where the tenant's external collaboration settings permit)</li>
+        <li>Assign the role to that service principal in Tenant B</li>
+        <li>Update the application to acquire tokens for Tenant B's resource endpoint, not its home tenant</li>
+      </ol>
+
+      <p>
+        The token acquisition piece is the part that's easy to miss. The managed identity's
+        <code>DefaultAzureCredential</code> will by default request a token scoped to the home tenant.
+        For cross-tenant access, you need to explicitly specify the target tenant in the credential
+        configuration.
+      </p>
+
+      <pre><code># Example: Specifying the target tenant when acquiring a token
+# (Azure SDK for Python)
+from azure.identity import ManagedIdentityCredential
+from azure.storage.blob import BlobServiceClient
+
+credential = ManagedIdentityCredential()
+# The resource scope must point to the target tenant's resource
+blob_client = BlobServiceClient(
+    account_url="https://&lt;storage-account&gt;.blob.core.windows.net",
+    credential=credential
+)</code></pre>
+
+      <h2>What I learned</h2>
+
+      <p>
+        The RBAC layer in Azure is only half the picture. Identity resolution — whether the target
+        resource's tenant can actually find and validate the principal — is equally important and
+        far less visible in the portal. If you're building multi-tenant automation or cross-tenant
+        resource access, test the full auth chain early, not after you've built everything else.
+      </p>
+      <p>
+        Also: the Azure Activity Log in the target tenant was crucial for diagnosis. The failed
+        authorisation events showed the principal ID being evaluated, which helped me confirm
+        the mismatch between what was being requested and what the tenant recognised.
+      </p>
+
+      <div style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border);">
+        <a href="../../blog/index.html" class="btn btn--ghost">← Back to blog</a>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <span class="footer__logo">Diego Cruz</span>
+        <ul class="footer__links">
+          <li><a href="../../about/index.html">About</a></li>
+          <li><a href="../../work/index.html">Work</a></li>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../contact/index.html">Contact</a></li>
+        </ul>
+        <span>Sydney, AU · © 2025</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/site.js"></script>
+</body>
+</html>

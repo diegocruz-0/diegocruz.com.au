@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What BJJ Taught Me About Debugging — Diego Cruz</title>
+  <meta name="description" content="There's more overlap between grappling and troubleshooting infrastructure than you'd expect. Both require composure, systematic thinking, and the willingness to start from first principles.">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <style>
+    .post-body { max-width: var(--reading-w); margin: 0 auto; }
+    .post-body h2 { margin-top: 3rem; margin-bottom: 1rem; font-size: 1.6rem; }
+    .post-body h3 { margin-top: 2rem; margin-bottom: 0.75rem; font-size: 1.25rem; }
+    .post-body p  { margin-bottom: 1.25rem; }
+    .post-body ul, .post-body ol { margin: 1rem 0 1.25rem 1.5rem; color: var(--slate-mid); }
+    .post-body li { margin-bottom: 0.5rem; }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="../../index.html" class="nav__logo">Diego<span>.</span></a>
+      <ul class="nav__links">
+        <li><a href="../../index.html">Home</a></li>
+        <li><a href="../../about/index.html">About</a></li>
+        <li><a href="../../work/index.html">Work</a></li>
+        <li><a href="../../life/index.html">Life</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../contact/index.html">Contact</a></li>
+      </ul>
+      <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="page-hero page-offset">
+    <div class="container post-body">
+      <span class="eyebrow">BJJ · Engineering · April 2025</span>
+      <h1>What BJJ taught me about debugging</h1>
+      <p class="mt-md" style="font-size: 1.1rem;">
+        There's more overlap between grappling and troubleshooting infrastructure than I initially expected. Both require composure, systematic thinking, and the willingness to start from first principles when you're stuck.
+      </p>
+    </div>
+  </div>
+
+  <section>
+    <div class="container post-body">
+
+      <p>
+        I started Brazilian Jiu-Jitsu a few years ago, and I've been doing IT infrastructure work for over
+        eight years. For the longest time these were completely separate compartments of my life. Then I
+        started noticing the same mental patterns appearing in both places.
+      </p>
+      <p>
+        This isn't a motivational post about "discipline carries over." It's more specific than that.
+        There are concrete thinking patterns from BJJ that have directly changed how I approach
+        technical debugging. Let me try to explain what I mean.
+      </p>
+
+      <h2>Composure is a skill, not a trait</h2>
+
+      <p>
+        When you're in a bad position on the mat — bottom of side control, someone heavier working
+        to take your back — the instinct is to panic and explode. The problem is that panic burns
+        energy and usually makes your position worse. Experienced grapplers learn to breathe, assess,
+        and move with intention even when things are uncomfortable.
+      </p>
+      <p>
+        A production outage triggers exactly the same instinct. Especially when it's a customer
+        environment, or when something important is down, or when you don't immediately know what's wrong.
+        The urge to start clicking around and trying things is strong. In my experience, that approach
+        usually extends the outage.
+      </p>
+      <p>
+        The discipline of pausing to assess — what do I actually know, what do the logs say, what changed
+        recently — is trained behaviour, not natural instinct. BJJ accelerated my ability to do that
+        in high-pressure technical situations.
+      </p>
+
+      <h2>Position before submission</h2>
+
+      <p>
+        One of the first principles taught in BJJ: establish a good position before attempting a
+        submission. Going for a choke from a bad position usually fails and leaves you more exposed.
+      </p>
+      <p>
+        The debugging equivalent: establish what's true before proposing solutions. I've seen
+        engineers (and I've done this myself) jump to a fix based on a hypothesis without actually
+        confirming the hypothesis first. You end up applying a change that doesn't address the real
+        issue, which costs time and sometimes makes things harder to trace.
+      </p>
+      <p>
+        The discipline of confirming your diagnosis before acting is the same mental habit. Position first.
+      </p>
+
+      <h2>You learn more from sparring than drilling</h2>
+
+      <p>
+        Drilling is important in BJJ — you build muscle memory for movements. But sparring is where
+        you actually develop problem-solving ability, because you're dealing with a live, unpredictable
+        partner making decisions you didn't expect.
+      </p>
+      <p>
+        In infrastructure, the equivalent is actually working in production or realistic lab environments
+        — not just reading documentation. I can read every Azure networking diagram ever written.
+        The understanding that sticks comes from deploying it, breaking it, and figuring out why.
+        That's sparring.
+      </p>
+
+      <h2>Tap early, tap often</h2>
+
+      <p>
+        BJJ has a culture of tapping out early when caught in a submission — signalling to your
+        partner that you acknowledge you're caught, so training continues without injury. There's
+        no shame in it. The goal is to learn, not to prove you can survive a choke.
+      </p>
+      <p>
+        The equivalent in engineering is asking for help earlier than pride usually allows. The engineers
+        I respect most are the ones who say "I've been stuck on this for 20 minutes, can you look at this
+        with me?" not the ones who silently chase problems for three hours to avoid admitting they're stuck.
+        The goal is to solve the problem, not to demonstrate you can solve it alone.
+      </p>
+
+      <div class="quote-block">
+        <p>"Both disciplines reward the person who stays calm, thinks clearly under pressure, and knows when to change approach."</p>
+      </div>
+
+      <p>
+        I'm not claiming you need to train BJJ to be a good engineer. But if you do train BJJ, I'd
+        bet you've noticed some of the same patterns. And if you're an engineer curious about grappling
+        — it trains a kind of thinking that will serve you off the mat too.
+      </p>
+
+      <div style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border);">
+        <a href="../../blog/index.html" class="btn btn--ghost">← Back to blog</a>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <span class="footer__logo">Diego Cruz</span>
+        <ul class="footer__links">
+          <li><a href="../../about/index.html">About</a></li>
+          <li><a href="../../work/index.html">Work</a></li>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../contact/index.html">Contact</a></li>
+        </ul>
+        <span>Sydney, AU · © 2025</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/site.js"></script>
+</body>
+</html>

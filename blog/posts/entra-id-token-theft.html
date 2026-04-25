@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Protecting Against Token Theft in Microsoft Entra ID — Diego Cruz</title>
+  <meta name="description" content="Token theft is one of the most effective attack techniques against modern identity infrastructure. Here's how Continuous Access Evaluation and token binding change the equation.">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <style>
+    .post-body { max-width: var(--reading-w); margin: 0 auto; }
+    .post-body h2 { margin-top: 3rem; margin-bottom: 1rem; font-size: 1.6rem; }
+    .post-body h3 { margin-top: 2rem; margin-bottom: 0.75rem; font-size: 1.25rem; }
+    .post-body p  { margin-bottom: 1.25rem; }
+    .post-body ul, .post-body ol { margin: 1rem 0 1.25rem 1.5rem; color: var(--slate-mid); }
+    .post-body li { margin-bottom: 0.5rem; }
+    .post-body code {
+      font-family: var(--font-mono);
+      font-size: 0.88em;
+      background: var(--cream-dark);
+      padding: 0.15em 0.4em;
+      border-radius: 3px;
+      border: 1px solid var(--border);
+    }
+    .post-body pre {
+      background: var(--slate);
+      color: var(--cream);
+      padding: 1.5rem;
+      border-radius: 4px;
+      overflow-x: auto;
+      margin: 1.5rem 0;
+    }
+    .post-body pre code {
+      background: none;
+      border: none;
+      color: inherit;
+      padding: 0;
+      font-size: 0.9rem;
+    }
+    .post-body .callout {
+      border-left: 3px solid var(--accent);
+      padding: 1rem 1.25rem;
+      background: var(--cream-dark);
+      margin: 1.5rem 0;
+      border-radius: 0 4px 4px 0;
+    }
+    .post-body .callout p { margin: 0; font-size: 0.95rem; }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="../../index.html" class="nav__logo">Diego<span>.</span></a>
+      <ul class="nav__links">
+        <li><a href="../../index.html">Home</a></li>
+        <li><a href="../../about/index.html">About</a></li>
+        <li><a href="../../work/index.html">Work</a></li>
+        <li><a href="../../life/index.html">Life</a></li>
+        <li><a href="../../blog/index.html">Blog</a></li>
+        <li><a href="../../contact/index.html">Contact</a></li>
+      </ul>
+      <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="page-hero page-offset">
+    <div class="container post-body">
+      <span class="eyebrow">Security · Entra ID · April 2025</span>
+      <h1>Protecting against token theft in Microsoft Entra ID</h1>
+      <p class="mt-md" style="font-size: 1.1rem;">
+        MFA is no longer enough on its own. Attackers have learned to steal tokens after authentication is complete — bypassing MFA entirely. Here's how Continuous Access Evaluation and token binding change the equation.
+      </p>
+    </div>
+  </div>
+
+  <section>
+    <div class="container post-body">
+
+      <p>
+        Multi-factor authentication is table stakes now. Most organisations have rolled it out, and the
+        security posture improvement is real. But threat actors have adapted. The attack pattern that's
+        become increasingly common — and that I see impacting partners and customers in the A/NZ market —
+        is token theft via adversary-in-the-middle (AiTM) phishing.
+      </p>
+      <p>
+        The mechanics are straightforward and the implications are significant: an attacker intercepts
+        the authentication session after MFA is completed, steals the session token, and replays it
+        from a completely different location. From the application's perspective, the token is valid.
+        No further authentication is required. The attacker is in.
+      </p>
+      <p>
+        This is a post about how Microsoft Entra ID's advanced capabilities — specifically
+        <strong>Continuous Access Evaluation (CAE)</strong> and <strong>token binding</strong> — address
+        this threat vector, and what you can do right now to reduce your exposure.
+      </p>
+
+      <h2>How token theft actually works</h2>
+
+      <p>
+        Modern authentication in Entra ID uses OAuth 2.0 tokens. When a user authenticates (including
+        completing MFA), they receive an access token and a refresh token. These tokens are then
+        presented to services — Microsoft 365, Azure, third-party apps — to prove identity without
+        re-authenticating on every request.
+      </p>
+      <p>
+        AiTM phishing attacks use a reverse proxy (tools like Evilginx2 are commonly cited in threat
+        intelligence reports) that sits between the user and the legitimate identity provider. The user
+        authenticates normally — including MFA — but the attacker's proxy captures the session cookie
+        or token on the way through. The attacker now has a valid, authenticated token they can replay.
+      </p>
+
+      <div class="callout">
+        <p><strong>The key insight:</strong> MFA protects the authentication event. It doesn't protect the token that results from it. Once the token is issued and stolen, MFA has already done its job — from the system's perspective, the authentication was legitimate.</p>
+      </div>
+
+      <h2>Continuous Access Evaluation (CAE)</h2>
+
+      <p>
+        CAE is Microsoft's response to the token lifetime problem. Traditionally, access tokens have a
+        fixed lifetime (typically 60-75 minutes). During that window, they're valid regardless of what
+        happens to the user account or network conditions.
+      </p>
+      <p>
+        CAE changes this by creating a real-time communication channel between Entra ID and CAE-capable
+        applications (Exchange Online, SharePoint Online, Teams, and others). When a critical event
+        occurs — a user's account is disabled, their password is changed, their session is revoked,
+        or their network location changes — Entra ID can signal the application to re-evaluate the
+        token <em>immediately</em>, rather than waiting for the token to expire naturally.
+      </p>
+
+      <h3>What CAE defends against</h3>
+      <ul>
+        <li><strong>Stolen token replay from a different IP</strong>: If your Conditional Access policy requires specific named locations or compliant network conditions, CAE can enforce revocation when the IP no longer matches — even mid-session.</li>
+        <li><strong>Account compromise response</strong>: When security teams detect a breach and disable or revoke a user's session in Entra ID, CAE-enabled apps honour that revocation within seconds rather than waiting up to an hour for token expiry.</li>
+        <li><strong>Password change propagation</strong>: A user changing their password (or an admin forcing a reset) triggers immediate re-authentication requirements in CAE-enabled services.</li>
+      </ul>
+
+      <h3>Enabling and verifying CAE</h3>
+      <p>
+        CAE is enabled by default for supported services — you don't need to turn it on. What you
+        <em>do</em> need to ensure is that your Conditional Access policies are configured to use
+        it effectively. Specifically:
+      </p>
+      <ul>
+        <li>Ensure you have Conditional Access policies that enforce location or compliance conditions — these are the signals CAE uses to trigger re-evaluation</li>
+        <li>Review your named locations and make sure they're accurate — stale named location data will cause false positives</li>
+        <li>Use the Entra ID sign-in logs to look for CAE revocation events and confirm they're being processed as expected</li>
+      </ul>
+
+      <h2>Token binding</h2>
+
+      <p>
+        Token binding is the more fundamental defence: cryptographically tying a token to the specific
+        TLS session in which it was issued. A bound token cannot be used from a different TLS session —
+        even if it's stolen — because the attacker's session won't have the corresponding private key.
+      </p>
+      <p>
+        Browser-based token binding (RFC 8471) has had a complicated adoption history, and is not yet
+        widely deployed across the ecosystem. However, Microsoft has implemented a version of this
+        concept through <strong>Proof of Possession (PoP) tokens</strong> in Entra ID — particularly
+        for Continuous Access Evaluation-enabled flows.
+      </p>
+      <p>
+        PoP tokens require the client to prove possession of a private key when presenting the token.
+        An attacker who steals the token but not the private key cannot replay it. This is a meaningful
+        shift from bearer token semantics, where possession of the token <em>is</em> the proof.
+      </p>
+
+      <div class="callout">
+        <p><strong>Practical takeaway:</strong> PoP token support is currently most mature in native application flows. If you're building line-of-business applications on top of Entra ID, using MSAL (Microsoft Authentication Library) with PoP support enabled is a meaningful hardening step.</p>
+      </div>
+
+      <h2>What to do right now</h2>
+
+      <p>
+        CAE and token binding are directionally correct defences, but they don't replace good security
+        hygiene. The practical steps I'd recommend for any Entra ID tenant:
+      </p>
+
+      <ol>
+        <li>
+          <strong>Enable Entra ID Identity Protection</strong> — The risk-based Conditional Access policies
+          can detect token theft signals (impossible travel, unfamiliar sign-in properties, anonymous IP)
+          and require step-up authentication even when a valid token is presented.
+        </li>
+        <li>
+          <strong>Enforce compliant device requirements via Conditional Access</strong> — A stolen token
+          replayed from an unmanaged device will fail Intune compliance checks if your CA policies require
+          them. This is one of the most effective controls against AiTM token replay.
+        </li>
+        <li>
+          <strong>Deploy phishing-resistant MFA</strong> — FIDO2 security keys and Windows Hello for
+          Business don't produce tokens that can be intercepted by an AiTM proxy in the same way. Where
+          possible, migrate high-value accounts away from push notification MFA.
+        </li>
+        <li>
+          <strong>Implement session token sign-in frequency controls</strong> — Set sign-in frequency
+          appropriately for your risk tolerance. Shorter-lived sessions limit the window of opportunity
+          for stolen token replay.
+        </li>
+        <li>
+          <strong>Review your named locations and monitor for impossible travel alerts</strong> — A token
+          being used simultaneously from Sydney and Eastern Europe is a signal your SIEM and Entra ID
+          monitoring should be surfacing.
+        </li>
+      </ol>
+
+      <h2>The bigger picture</h2>
+
+      <p>
+        The shift from "authenticate the user" to "continuously evaluate the session" is the right
+        architectural direction for identity security. CAE represents a meaningful step toward that
+        model. But it works best when your Conditional Access policies are well-designed, your device
+        management is mature, and you're actively monitoring the signal that Entra ID produces.
+      </p>
+      <p>
+        Token theft isn't a vulnerability that gets patched — it's an exploitation of a design
+        characteristic of bearer tokens. The defence is architectural, and it requires layering controls
+        rather than relying on any single mechanism.
+      </p>
+
+      <div style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border);">
+        <a href="../../blog/index.html" class="btn btn--ghost">← Back to blog</a>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <span class="footer__logo">Diego Cruz</span>
+        <ul class="footer__links">
+          <li><a href="../../about/index.html">About</a></li>
+          <li><a href="../../work/index.html">Work</a></li>
+          <li><a href="../../blog/index.html">Blog</a></li>
+          <li><a href="../../contact/index.html">Contact</a></li>
+        </ul>
+        <span>Sydney, AU · © 2025</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/site.js"></script>
+</body>
+</html>
