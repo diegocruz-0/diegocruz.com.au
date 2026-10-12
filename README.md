@@ -37,7 +37,7 @@ bundle install
 bundle exec jekyll serve
 ```
 
-Open the local address printed by Jekyll. The `github-pages` Gemfile dependency matches the GitHub Pages build environment.
+Open the local address printed by Jekyll. The Gemfile uses the GitHub Pages-compatible Jekyll 3.10 release and only the plugins this site needs. The `github-pages` umbrella gem is intentionally omitted: it pulls in unused remote-theme support that prevents Dependabot from resolving the `rubyzip` security update. GitHub Pages still builds and publishes from `main` as described above.
 
 ## Project structure
 
