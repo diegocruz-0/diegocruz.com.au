@@ -1,0 +1,30 @@
+---
+layout: default
+---
+<main id="main-content" class="article container">
+  <header class="article-header">
+    <a class="back-link" href="{{ '/blog/' | relative_url }}">← All writing</a>
+    <p class="eyebrow">Article</p>
+    <h1>{{ page.title | escape }}</h1>
+    <div class="article-meta">
+      <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time>
+      {% if page.tags.size > 0 %}
+        <ul class="tag-list" aria-label="Topics">
+          {% for tag in page.tags %}<li>{{ tag | escape }}</li>{% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+    {% if page.description %}<p class="article-description">{{ page.description | escape }}</p>{% endif %}
+  </header>
+
+  {% if page.toc %}
+    <nav class="article-toc" aria-label="Table of contents" data-toc hidden>
+      <p class="eyebrow">On this page</p>
+      <ol></ol>
+    </nav>
+  {% endif %}
+
+  <article class="prose" data-article-content>
+    {{ content }}
+  </article>
+</main>

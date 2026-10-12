@@ -1,70 +1,53 @@
-# Diego Cruz — Personal Website
+# Diego Cruz — Cloud, AI, and engineering
 
-A warm, editorial personal website built for GitHub Pages.
+This is the source for [diegocruz.com.au](https://diegocruz.com.au), built with Jekyll and hosted on GitHub Pages. The site is an English-language home page and blog; the blog starts empty by design.
 
-## 🚀 Getting started on GitHub Pages
+## Publishing
 
-1. Upload this entire folder to a GitHub repository named `username.github.io`
-   (replace `username` with your actual GitHub username)
-2. Go to **Settings → Pages → Source → Deploy from branch → main**
-3. Your site will be live at `https://username.github.io`
+GitHub Pages builds the site from the repository root on the `main` branch. Keep the existing `CNAME` file in place for the custom domain. The supported `jekyll-feed` and `jekyll-seo-tag` plugins generate the RSS feed at `/feed.xml` and page metadata.
 
-## 📁 File structure
+### Write a post
 
-```
-/
-├── index.html              ← Homepage
-├── about/index.html        ← About me
-├── work/index.html         ← Work & certifications
-├── life/index.html         ← BJJ, BBQ, Fernando
-├── blog/
-│   ├── index.html          ← Blog post list
-│   └── posts/
-│       ├── _template.html  ← Copy this to create new posts
-│       └── *.html          ← Individual posts
-├── contact/index.html      ← Contact page
-└── assets/
-    ├── css/style.css       ← All styles (CSS variables at the top)
-    ├── js/site.js          ← Navigation, scroll reveal
-    └── images/             ← Drop your photos here
-```
+1. Add a Markdown file under `_posts/` named `YYYY-MM-DD-short-title.md`.
+2. Start it with front matter:
 
-## ✏️ Common edits
-
-### Change the accent colour
-Open `assets/css/style.css` and change `--accent: #C4724A;` to any colour you like.
-
-### Add a new blog post
-1. Duplicate `blog/posts/_template.html` and rename it
-2. Edit the title, content, date, and category
-3. Add a new `<li>` entry to `blog/index.html`
-
-### Add a photo
-1. Drop the image into `assets/images/`
-2. Reference it anywhere with:
-   ```html
-   <img src="assets/images/your-photo.jpg" alt="Description">
+   ```yaml
+   ---
+   title: "A clear, specific title"
+   date: 2026-10-12 09:00:00 +1100
+   description: "A concise summary for the blog listing and search results."
+   tags:
+     - Azure
+     - AI
+   toc: true
+   ---
    ```
-   (Use `../assets/images/` from inside subfolders like `/about/`, `/life/` etc.)
 
-### Update contact links
-Open `contact/index.html` and update the LinkedIn, GitHub, and email links.
+3. Write the article in Markdown below the front matter. Use fenced code blocks for examples, link to original sources, and set `toc: true` when the article has enough sections to benefit from a generated table of contents. Omit `toc` for shorter posts.
+4. Commit and push to `main`; GitHub Pages builds and publishes the site.
 
-## 📸 Photos in use
+Posts are sorted by their date. Use the tags field for topic filters on the blog page. Draft content can be kept locally in Jekyll’s `_drafts/` directory; drafts are not published.
 
-| File | Used on |
-|------|---------|
-| `assets/images/bbq-kamado.jpg` | Homepage hero, Life page, Work page |
-| `assets/images/fernando.jpg` | Homepage, About, Life |
-| `assets/images/bjj-team.webp` | Homepage card, Life page *(drop this file in if you have it)* |
+## Local preview
 
-## 🎨 Design system (quick reference)
+Ruby and Bundler are required. Install dependencies once, then run Jekyll:
 
-| Token | Value | Used for |
-|-------|-------|----------|
-| `--cream` | `#F7F4EE` | Page background |
-| `--slate` | `#2C2F35` | Text, nav, footer |
-| `--accent` | `#C4724A` | Terracotta highlight |
-| `--font-display` | Playfair Display | Headings |
-| `--font-body` | DM Sans | Body text |
-| `--font-mono` | DM Mono | Labels, tags, code |
+```sh
+bundle install
+bundle exec jekyll serve
+```
+
+Open the local address printed by Jekyll. The `github-pages` Gemfile dependency matches the GitHub Pages build environment.
+
+## Project structure
+
+```text
+_config.yml           Jekyll settings, plugins, and URL configuration
+_layouts/             Shared site and article layouts
+_posts/               Published Markdown articles
+assets/css/style.css  Site styles
+assets/js/site.js     Mobile navigation, topic filters, and optional article TOC
+blog/index.html       Jekyll-generated article listing
+index.html            Home page and recent posts
+CNAME                 GitHub Pages custom domain
+```

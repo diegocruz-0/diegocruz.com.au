@@ -1,0 +1,38 @@
+title: Diego Cruz
+description: "Notes on AI, Azure, and engineering."
+url: "https://diegocruz.com.au"
+baseurl: ""
+lang: en-AU
+timezone: Australia/Sydney
+markdown: kramdown
+permalink: /blog/:year/:month/:day/:title/
+excerpt_separator: "<!--more-->"
+
+author:
+  name: Diego Cruz
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+feed:
+  path: feed.xml
+
+exclude:
+  - AGENTS.md
+  - docs
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post

@@ -1,62 +1,98 @@
-/* ──────────────────────────────────────────
-   Diego Costa — site.js
-   ────────────────────────────────────────── */
+(() => {
+  const menuButton = document.querySelector(".nav-toggle");
+  const navigation = document.querySelector("#nav-links");
 
-// ── Active nav link ──────────────────────
-(function setActiveNav() {
-  const links = document.querySelectorAll('.nav__links a');
-  const current = window.location.pathname.split('/').filter(Boolean).pop() || 'index.html';
-  links.forEach(a => {
-    const href = a.getAttribute('href');
-    if (href === current || href === './' + current || (current === '' && href === 'index.html')) {
-      a.classList.add('active');
-    }
-  });
-})();
+  if (menuButton && navigation) {
+    document.documentElement.classList.add("js-menu");
+    const closeMenu = () => {
+      menuButton.setAttribute("aria-expanded", "false");
+      menuButton.querySelector(".visually-hidden").textContent = "Open navigation";
+      navigation.classList.remove("is-open");
+    };
 
-// ── Mobile nav toggle ────────────────────
-const toggle = document.querySelector('.nav__toggle');
-const navLinks = document.querySelector('.nav__links');
-
-if (toggle && navLinks) {
-  toggle.addEventListener('click', () => {
-    navLinks.classList.toggle('open');
-    const isOpen = navLinks.classList.contains('open');
-    toggle.setAttribute('aria-expanded', isOpen);
-    document.body.style.overflow = isOpen ? 'hidden' : '';
-  });
-
-  navLinks.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => {
-      navLinks.classList.remove('open');
-      document.body.style.overflow = '';
+    menuButton.addEventListener("click", () => {
+      const isOpen = menuButton.getAttribute("aria-expanded") !== "true";
+      menuButton.setAttribute("aria-expanded", String(isOpen));
+      menuButton.querySelector(".visually-hidden").textContent = isOpen ? "Close navigation" : "Open navigation";
+      navigation.classList.toggle("is-open", isOpen);
     });
-  });
-}
 
-// ── Scroll reveal ────────────────────────
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach((entry, i) => {
-    if (entry.isIntersecting) {
-      const delay = entry.target.dataset.delay || 0;
-      setTimeout(() => {
-        entry.target.classList.add('visible');
-      }, delay);
-      revealObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    navigation.addEventListener("click", (event) => {
+      if (event.target.closest("a")) closeMenu();
+    });
 
-document.querySelectorAll('.reveal').forEach((el, i) => {
-  if (!el.dataset.delay) el.dataset.delay = (i % 4) * 80;
-  revealObserver.observe(el);
-});
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && menuButton.getAttribute("aria-expanded") === "true") {
+        closeMenu();
+        menuButton.focus();
+      }
+    });
+  }
 
-// ── Nav scroll style ─────────────────────
-window.addEventListener('scroll', () => {
-  const nav = document.querySelector('.nav');
-  if (!nav) return;
-  nav.style.boxShadow = window.scrollY > 10
-    ? '0 2px 20px rgba(44,47,53,0.08)'
-    : 'none';
-}, { passive: true });
+  const filter = document.querySelector("[data-topic-filter]");
+  if (filter) {
+    const posts = [...document.querySelectorAll("[data-post]")];
+    const options = filter.querySelector("[data-filter-options]");
+    const status = filter.querySelector("[data-filter-status]");
+    const topics = [...new Set(posts.flatMap((post) => post.dataset.tags.split("|").filter(Boolean)))];
+
+    const applyFilter = (topic, button) => {
+      let visible = 0;
+      posts.forEach((post) => {
+        const matches = topic === "all" || post.dataset.tags.split("|").includes(topic);
+        post.hidden = !matches;
+        if (matches) visible += 1;
+      });
+      options.querySelectorAll("button").forEach((option) => {
+        option.setAttribute("aria-pressed", String(option === button));
+      });
+      status.textContent = `${visible} ${visible === 1 ? "article" : "articles"} shown`;
+    };
+
+    const addFilterButton = (label, topic) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "filter-button";
+      button.textContent = label;
+      button.setAttribute("aria-pressed", "false");
+      button.addEventListener("click", () => applyFilter(topic, button));
+      options.append(button);
+      return button;
+    };
+
+    const allButton = addFilterButton("All topics", "all");
+    topics.sort((a, b) => a.localeCompare(b)).forEach((topic) => addFilterButton(topic, topic));
+    filter.hidden = topics.length === 0;
+    if (topics.length > 0) allButton.setAttribute("aria-pressed", "true");
+  }
+
+  const toc = document.querySelector("[data-toc]");
+  const article = document.querySelector("[data-article-content]");
+  if (toc && article) {
+    const headings = [...article.querySelectorAll("h2, h3")];
+    const list = toc.querySelector("ol");
+    const slugCounts = new Map();
+
+    headings.forEach((heading) => {
+      if (!heading.id) {
+        const base = heading.textContent.trim().toLowerCase()
+          .replace(/[^\p{L}\p{N}\s-]/gu, "")
+          .replace(/\s+/g, "-")
+          .replace(/-+/g, "-");
+        const count = (slugCounts.get(base) || 0) + 1;
+        slugCounts.set(base, count);
+        heading.id = count === 1 ? base : `${base}-${count}`;
+      }
+
+      const item = document.createElement("li");
+      if (heading.tagName === "H3") item.className = "toc-level-3";
+      const link = document.createElement("a");
+      link.href = `#${heading.id}`;
+      link.textContent = heading.textContent;
+      item.append(link);
+      list.append(item);
+    });
+
+    if (headings.length > 0) toc.hidden = false;
+  }
+})();

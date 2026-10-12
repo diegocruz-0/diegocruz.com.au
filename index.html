@@ -1,231 +1,76 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Diego Cruz — Cloud Engineer · Sydney</title>
-  <meta name="description" content="Diego Cruz is a Cloud Engineer based in Sydney with 8+ years in enterprise infrastructure and Microsoft cloud technologies. Curious. Disciplined. Human.">
-  <link rel="stylesheet" href="assets/css/style.css">
-</head>
-<body>
+---
+layout: default
+title: Home
+description: "Diego Cruz writes about AI, Azure, and the engineering behind useful technology."
+---
 
-  <!-- ── Navigation ── -->
-  <nav class="nav" role="navigation">
-    <div class="nav__inner">
-      <a href="index.html" class="nav__logo">Diego<span>.</span></a>
-      <ul class="nav__links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about/index.html">About</a></li>
-        <li><a href="work/index.html">Work</a></li>
-        <li><a href="life/index.html">Life</a></li>
-        <li><a href="blog/index.html">Blog</a></li>
-        <li><a href="contact/index.html">Contact</a></li>
-      </ul>
-      <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </nav>
-
-  <!-- ── Hero ── -->
-  <header class="hero">
-    <div class="container">
-      <div class="hero__inner">
-
-        <div class="hero__text">
-          <p class="hero__kicker">Cloud Engineer · Sydney, AU</p>
-          <h1 class="hero__title">
-            Building systems.<br>
-            <em>Living fully.</em>
-          </h1>
-          <p class="hero__subtitle">
-            I'm Diego Cruz — a Cloud Engineer with 8+ years in enterprise infrastructure,
-            helping organisations across Australia and New Zealand migrate, design, and
-            optimise their Microsoft cloud environments. Outside the terminal, I'm in
-            the kitchen, on the mat, or feeding Fernando.
-          </p>
-          <div class="hero__tags">
-            <span class="tag">Azure</span>
-            <span class="tag">Microsoft Cloud</span>
-            <span class="tag">Infrastructure</span>
-            <span class="tag">BJJ</span>
-            <span class="tag">BBQ</span>
-            <span class="tag">Sydney</span>
-          </div>
-          <div class="hero__cta">
-            <a href="contact/index.html" class="btn btn--primary">Get in touch</a>
-            <a href="about/index.html" class="btn btn--ghost">Learn more →</a>
-          </div>
+<main id="main-content">
+  <section class="hero">
+    <div class="container hero__inner">
+      <div class="hero__copy">
+        <p class="eyebrow">Cloud engineering · Sydney, Australia</p>
+        <h1>Building a clearer picture of <span>cloud and AI.</span></h1>
+        <p class="hero__intro">
+          I’m Diego, a cloud engineer working across Microsoft cloud and enterprise
+          infrastructure. Here I share what I’m learning about Azure, AI, and the
+          tools that make engineering work better.
+        </p>
+        <div class="hero__links">
+          <a class="button button--primary" href="{{ '/blog/' | relative_url }}">Read the blog</a>
+          <a class="text-link" href="https://www.linkedin.com/in/diegocruz-/" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
+          <a class="text-link" href="https://github.com/diegocruz-0" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
         </div>
-
-        <div class="hero__photo-wrap">
-          <img
-            src="assets/images/bbq-kamado.jpg"
-            alt="Diego with his Kamado Joe BBQ on the balcony in Sydney"
-            class="hero__photo"
-            width="420"
-          >
-          <div class="hero__photo-caption">
-            <strong>Kamado Joe days</strong>
-            Good fire, good food — Sunday ritual in Sydney.
-          </div>
-        </div>
-
+        <p class="hero__note">Certifications: GH-900 · GH-300</p>
       </div>
-    </div>
-  </header>
-
-  <hr class="section-divider">
-
-  <!-- ── Intro strip ── -->
-  <section class="intro-strip">
-    <div class="container reading-col">
-      <span class="eyebrow">A bit about me</span>
-      <h2>Engineer by trade.<br>Craftsman by nature.</h2>
-      <p class="mt-md">
-        I believe the mindset that makes a good engineer and the mindset that makes a good
-        cook — or a good grappler — are the same: patience, iteration, attention to detail,
-        and genuine curiosity about <em>why</em> things work the way they do.
-      </p>
-      <p class="mt-md">
-        This site is a space to share that — the technical work, the ideas, and the
-        everyday life that keeps me grounded.
-      </p>
+      <figure class="contribution-art">
+        <p class="eyebrow">Build. Learn. Share.</p>
+        <div class="contribution-grid" aria-hidden="true">
+          {%- for row in (0..6) -%}
+            {%- assign row_offset = row | times: 7 -%}
+            {%- for column in (0..12) -%}
+              {%- assign level = column | times: column | plus: row_offset | modulo: 5 -%}
+              {%- assign delay = column | plus: row | times: 60 -%}
+              <span class="contribution-cell" data-level="{{ level }}" style="--wave-delay: {{ delay }}ms"></span>
+            {%- endfor -%}
+          {%- endfor -%}
+        </div>
+        <figcaption>A GitHub-inspired illustration, not live activity.</figcaption>
+      </figure>
     </div>
   </section>
 
-  <hr class="section-divider">
-
-  <!-- ── Sections preview ── -->
-  <section>
+  <section class="section section--recent" aria-labelledby="recent-heading">
     <div class="container">
-      <span class="eyebrow reveal">What you'll find here</span>
-      <h2 class="mb-lg reveal">Work · Life · Everything else</h2>
-
-      <div class="card-grid">
-
-        <a href="work/index.html" class="card reveal">
-          <div class="card__img--placeholder">☁️</div>
-          <div class="card__body">
-            <span class="card__label">Work</span>
-            <h3 class="card__title">Cloud & Infrastructure</h3>
-            <p class="card__text">
-              8+ years working with enterprise infrastructure, Windows Server,
-              Azure, networking, and identity. Currently helping A/NZ businesses
-              move to the cloud at Ingram Micro.
-            </p>
-          </div>
-        </a>
-
-        <a href="life/index.html#bbq" class="card reveal">
-          <img
-            src="assets/images/bbq-kamado.jpg"
-            alt="Kamado Joe BBQ"
-            class="card__img"
-          >
-          <div class="card__body">
-            <span class="card__label">Cooking & BBQ</span>
-            <h3 class="card__title">Fire, smoke, and patience</h3>
-            <p class="card__text">
-              Low-and-slow cooks, Sunday roasts, soups that take all day.
-              The Kamado Joe is the centrepiece. The philosophy is the same
-              as engineering: control what you can, trust the process.
-            </p>
-          </div>
-        </a>
-
-        <a href="life/index.html#bjj" class="card reveal">
-          <img
-            src="assets/images/bjj-team.webp"
-            alt="BJJ team photo"
-            class="card__img"
-            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-          >
-          <div class="card__img--placeholder" style="display:none;">🥋</div>
-          <div class="card__body">
-            <span class="card__label">Brazilian Jiu-Jitsu</span>
-            <h3 class="card__title">The mat teaches everything</h3>
-            <p class="card__text">
-              BJJ has shaped how I approach problems — stay calm, be systematic,
-              keep showing up. It's one of the most honest forms of learning
-              I've ever encountered.
-            </p>
-          </div>
-        </a>
-
-      </div>
-    </div>
-  </section>
-
-  <hr class="section-divider">
-
-  <!-- ── Fernando ── -->
-  <section style="padding: 5rem 0; background: var(--cream-dark);">
-    <div class="container">
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;">
-
-        <div class="reveal">
-          <span class="eyebrow">The co-worker</span>
-          <h2>Meet Fernando.</h2>
-          <p class="mt-md">
-            Fernando is a Devon Rex with the energy of a toddler and the opinions of a
-            senior engineer. He has strong views on keyboard placement, meeting schedules,
-            and the appropriate time to demand attention (always).
-          </p>
-          <p class="mt-md">
-            He's been known to supervise deployments, interrupt Teams calls, and wear a
-            party hat on special occasions — always reluctantly, always with full dignity.
-          </p>
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">From the notebook</p>
+          <h2 id="recent-heading">Recent writing</h2>
         </div>
-
-        <div class="reveal" style="position: relative;">
-          <img
-            src="assets/images/fernando.jpg"
-            alt="Fernando the Devon Rex cat dressed in a party hat and blue sweater"
-            style="width:100%; max-width:380px; border-radius:4px; box-shadow: 0 20px 50px rgba(44,47,53,0.12); margin: 0 auto;"
-          >
-        </div>
-
+        <a class="text-link" href="{{ '/blog/' | relative_url }}">All posts <span aria-hidden="true">→</span></a>
       </div>
+      {% assign recent_posts = site.posts | slice: 0, 3 %}
+      {% if recent_posts.size > 0 %}
+        <ol class="post-list post-list--home">
+          {% for post in recent_posts %}
+            <li class="post-card">
+              <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %-d, %Y" }}</time>
+              <div>
+                <h3><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h3>
+                {% if post.excerpt %}
+                  <p>{{ post.excerpt | strip_html | normalize_whitespace | truncate: 180 }}</p>
+                {% endif %}
+                {% if post.tags.size > 0 %}
+                  <ul class="tag-list" aria-label="Topics">
+                    {% for tag in post.tags %}<li>{{ tag | escape }}</li>{% endfor %}
+                  </ul>
+                {% endif %}
+              </div>
+            </li>
+          {% endfor %}
+        </ol>
+      {% else %}
+        <p class="empty-note">The first article is on its way. In the meantime, explore the <a href="{{ '/blog/' | relative_url }}">blog topics</a> or find me on <a href="https://github.com/diegocruz-0">GitHub</a>.</p>
+      {% endif %}
     </div>
   </section>
-
-  <hr class="section-divider">
-
-  <!-- ── CTA ── -->
-  <section style="padding: 6rem 0; text-align: center;">
-    <div class="container">
-      <span class="eyebrow reveal">Let's connect</span>
-      <h2 class="reveal" style="margin: 0 auto 1.5rem; max-width: 16ch;">
-        Curious about my work,<br>or just want to say hi?
-      </h2>
-      <p class="reveal" style="margin: 0 auto 2.5rem; text-align:center;">
-        Whether it's a cloud architecture question, a BBQ tip, or a BJJ thought —
-        my inbox is open.
-      </p>
-      <div class="reveal" style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
-        <a href="contact/index.html" class="btn btn--primary">Contact me</a>
-        <a href="https://www.linkedin.com/feed/" target="_blank" rel="noopener" class="btn btn--ghost">LinkedIn →</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Footer ── -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer__inner">
-        <span class="footer__logo">Diego Cruz</span>
-        <ul class="footer__links">
-          <li><a href="about/index.html">About</a></li>
-          <li><a href="work/index.html">Work</a></li>
-          <li><a href="blog/index.html">Blog</a></li>
-          <li><a href="contact/index.html">Contact</a></li>
-        </ul>
-        <span>Sydney, AU · © 2025</span>
-      </div>
-    </div>
-  </footer>
-
-  <script src="assets/js/site.js"></script>
-</body>
-</html>
+</main>
